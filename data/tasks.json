@@ -1,0 +1,56 @@
+[
+    {
+        "title" : "INFO 6205 Assignment 1",
+        "description" : "Create a simple task tracker application using JavaScript. Each task should have a title, description, and creation date. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "completed" : false,
+        "createdDate": "06/12/2024, 3:42:47 PM"
+    },
+    {
+        "title" : "INFO 6205 Assignment 2",
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!",
+        "completed" : true,
+        "createdDate": "06/05/2024, 5:15:34 PM"
+    },
+    {
+        "title" : "INFO 6205 Assignment 3",
+        "description" : "Add layout on Assignment 3 web page as per the mock image and convert all CSS to SCSS syntax. The goal of this assignment is to learn about CSS positioning, Grid layout & Flexbox, and SCSS features like variables, mixins, inheritance, control statements, functions, operators, etc.",
+        "completed" : false,
+        "createdDate": "29/05/2024, 8:35:17 AM"
+    },
+    {
+        "title" : "INFO 6205 Assignment 4",
+        "description" : "The goal of this assignment is to learn about CSS Selectors, properties, Combinators, Pseudo-classes, Pseudo-elements, flexbox and Box model. Use CSS class and tag selectors. JavaScript is not required. This will not add more grade points. All individual elements should look very close to the Assignment 2 image. You should not use the table element for formatting. You should add code documentation using CSS comments. You can also use any open-source fonts.",
+        "completed" : false,
+        "createdDate": "22/05/2024, 10:30:00 PM"
+    },
+    {
+        "title" : "INFO 6205 Assignment 5",
+        "description" : "Build an HTML document for the attached web page design. The goal of this assignment is to learn about HTML elements and attributes. Should use an HTML form element for the form section. CSS and JavaScript are not required even if the page does not look like the mock image. Layout and styling are not required.",
+        "completed" : true,
+        "createdDate": "15/05/2024, 11:17:20 AM"
+    },
+    {
+        "title" : "INFO 6205 Assignment 6",
+        "description" : "This assignment requires setting up git along with NodeJS & Mongo Compass installation. The index.html file lists all the tasks completed as part of this assignment.",
+        "completed" : true,
+        "createdDate": "08/05/2024, 10:20:20 AM"
+    },
+    {
+        "title" : "Task 8",
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!",
+        "completed" : false,
+        "createdDate": "06/12/2024, 6:42:47 PM"
+    },
+    {
+        "title" : "Task 9",
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!",
+        "completed" : false,
+        "createdDate": "06/12/2024, 9:15:33 PM"
+    },
+    {
+        "title" : "Task 10",
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!",
+        "completed" : true,
+        "createdDate": "06/12/2024, 10:22:47 AM"
+    }
+]
