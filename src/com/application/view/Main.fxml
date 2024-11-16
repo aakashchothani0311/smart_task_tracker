@@ -19,15 +19,11 @@
    <children>
       <AnchorPane layoutX="39.0" layoutY="154.0" minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="900.0">
          <children>
-            <ImageView fitHeight="458.0" fitWidth="959.0" layoutY="-15.0" opacity="0.2" pickOnBounds="true">
-               <image>
-                  <Image url="@../../img/HomePage.jpg" />
-               </image>
-            </ImageView>
             <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="20.0" prefHeight="35.0" prefWidth="573.0" spacing="30.0">
                <children>
             
                               <RadioButton fx:id="cAllItemsRB" mnemonicParsing="false" onAction="#handleConAllItemsRB" selected="true" text="Show All Items" />
+                  <RadioButton mnemonicParsing="false" text="Show Tasks Due Today" />
                </children>
             </HBox>
             <GridPane fx:id="medicinesGrid" alignment="CENTER" gridLinesVisible="true" layoutX="32.0" layoutY="84.0" prefHeight="27.0" prefWidth="810.0" visible="false">
@@ -85,7 +81,7 @@
       </Text>
       <ImageView fitHeight="114.0" fitWidth="108.0" layoutX="47.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/Logo.png" />
+            <Image url="@../../../../img/Logo.png" />
          </image>
       </ImageView>
    </children>
