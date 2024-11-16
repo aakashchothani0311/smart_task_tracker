@@ -1,4 +1,4 @@
-package application;
+package com.application;
 	
 import java.io.IOException;
 
@@ -11,12 +11,13 @@ import javafx.scene.Scene;
 public class Main extends Application {
 	
 	private static Stage stg;
+	private String viewPath = "/com/application/view/";
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		stg = primaryStage;
 		
-		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Login.fxml"));
 		Scene scene = new Scene(root);
 				
 		primaryStage.setTitle("SMART Task Tracker");
@@ -25,7 +26,7 @@ public class Main extends Application {
 	}
 	
 	public void successfulLogin() throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Main.fxml"));
 		Scene scene = new Scene(root, 1000, 1000);
 		
 		stg.setTitle("My Tasks");
