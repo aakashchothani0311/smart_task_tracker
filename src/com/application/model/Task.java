@@ -8,11 +8,11 @@ public class Task {
 	private boolean isCompleted;
 	private LocalDate createdDate;
 	
-	Task(String title, String desc, boolean isCompleted){
+	public Task(String title, String desc, boolean isCompleted){
 		this(title, desc, isCompleted, LocalDate.now());
 	}
 	
-	Task(String title, String desc, boolean isCompleted, LocalDate createdDate){
+	public Task(String title, String desc, boolean isCompleted, LocalDate createdDate){
 		this.title = title;
 		this.desc = desc;
 		this.isCompleted = isCompleted;
