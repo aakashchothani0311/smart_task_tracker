@@ -21,11 +21,13 @@ public class Main extends Application {
 				
 		primaryStage.setTitle("SMART Task Tracker"); 
 		primaryStage.setScene(scene);
-		primaryStage.setFullScreen(true);
+		
+		primaryStage.setMinWidth(1200);
+	    primaryStage.setMinHeight(800);
 		primaryStage.show();
 	}
 	
-	public void successfulLogin() throws IOException {
+	/*public void successfulLogin() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Main.fxml"));
 		Scene scene = new Scene(root);
 		
@@ -33,7 +35,7 @@ public class Main extends Application {
 		
 		stg.setTitle("My Tasks");
 		stg.setScene(scene);
-	}
+	}*/
 	
 	public static void main(String[] args) {
 		launch(args);		
