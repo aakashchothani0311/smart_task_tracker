@@ -19,9 +19,7 @@ public class TasksFileUtil {
 		
 		try(Scanner fin = new Scanner(new File(filePath))){     
 			while(fin.hasNextLine()) {
-				String line = fin.nextLine();
-				System.out.println(line);
-				
+				String line = fin.nextLine();				
 				String[] lineSplit = formatString(line).split("\\|\\|");
 				
 				String title = formatString(lineSplit[0]);

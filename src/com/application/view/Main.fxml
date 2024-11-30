@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.TaskController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width: 1px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.TaskListController">
    <children>
-      <Pane prefHeight="120.0" prefWidth="1000.0" style="-fx-background-color: #595757;">
+      <Pane prefHeight="120.0" prefWidth="1000.0" style="-fx-background-color: #595757; -fx-border-color: #000000;">
          <children>
             <Text fill="WHITE" layoutX="200.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Smart Task Tracker">
                <font>
@@ -33,15 +33,15 @@
             <HBox alignment="CENTER_LEFT" layoutX="78.0" layoutY="11.0" prefHeight="35.0" prefWidth="573.0" spacing="30.0">
                <children>
             
-                                          <RadioButton fx:id="rb_allTasks" mnemonicParsing="false" selected="true" text="All Tasks" />
-                  <RadioButton fx:id="rb_completedTasks" mnemonicParsing="false" text="Completed Tasks" />
-                  <RadioButton fx:id="rb_dueTasks" layoutX="112.0" layoutY="19.0" mnemonicParsing="false" text="Tasks Due Today" />
+                  <RadioButton fx:id="rb_allTasks" mnemonicParsing="false" onAction="#showAllList" selected="true" text="All Tasks" />
+                  <RadioButton fx:id="rb_completedTasks" mnemonicParsing="false" onAction="#showCompletedTask" text="Completed Tasks" />
+                  <RadioButton fx:id="rb_dueTasks" layoutX="112.0" layoutY="19.0" mnemonicParsing="false" onAction="#showTasksDueToday" text="Tasks Due Today" />
                </children>
             </HBox>
             <Button fx:id="b_createTask" layoutX="847.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
          </children>
       </Pane>
-      <GridPane fx:id="g_taskGrid" layoutX="50.0" layoutY="200.0" prefHeight="200.0" prefWidth="900.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-background-color: #fcba03;">
+      <GridPane fx:id="g_taskGrid" gridLinesVisible="true" layoutX="50.0" layoutY="230.0" prefWidth="900.0" style="-fx-border-color: #000000; -fx-border-width: 1px;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         </columnConstraints>
