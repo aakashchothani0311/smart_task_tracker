@@ -1,7 +1,5 @@
 package com.application;
 
-import com.application.util.TasksFileUtil;
-
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +36,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
-//		TasksFileUtil.readAllTasks();
+		launch(args);		
 	}
 }
