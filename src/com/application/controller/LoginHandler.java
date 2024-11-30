@@ -17,7 +17,7 @@ public class LoginHandler {
 	public void handleLogin() throws IOException{		
 		if(Creds.uName.equals(uname.getText()) && Creds.pswd.equals(pswd.getText())) {
 			Main obj = new Main();
-			obj.successfulLogin();
+		//	obj.successfulLogin();
 		} else {
 			Alert error = new Alert(Alert.AlertType.ERROR);
 			error.setTitle("Login Failed");
