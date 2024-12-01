@@ -47,6 +47,17 @@ public class TaskController implements Initializable {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
+	@FXML
+	private void handleCreateTask(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
+        Pane root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Add New Task");
+        stage.setScene(new Scene(root));
+        stage.show();
+	}
+	
 	void editTask(ActionEvent evt) {
 		System.out.println("Edit");
 	}
@@ -75,17 +86,4 @@ public class TaskController implements Initializable {
 		}
 	}
 	
-	private void handleCreateTask(ActionEvent event) {
-	    try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
-	        Pane root = loader.load();
-
-	        Stage stage = new Stage();
-	        stage.setTitle("Add New Task");
-	        stage.setScene(new Scene(root));
-	        stage.show();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
 }

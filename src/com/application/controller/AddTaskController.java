@@ -1,25 +1,46 @@
 package com.application.controller;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class AddTaskController {
+import com.application.model.Task;
+import com.application.util.TasksFileUtil;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
-	public void addTaskDialog(ActionEvent event) {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
-			Parent root = loader.load();
-			
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+public class AddTaskController implements Initializable {
+	@FXML TextField taskTitle;
+	@FXML TextArea taskDesc;
+	@FXML Text createdDate;
+	@FXML DatePicker dueDate;
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		createdDate.setText(LocalDate.now().toString());
 	}
+	
+	@FXML
+	private void handleAddTask() {
 		
+		String title = taskTitle.getText();
+		String description = taskDesc.getText();
+		LocalDate dueTask = dueDate.getValue();
+		
+		Task newTask = new Task(title,description, dueTask);
+		
+		TasksFileUtil.saveTask(newTask);
+	}
+	
+	
 }
