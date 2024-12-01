@@ -7,8 +7,10 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 	
 	private List<T> heap;
 	
-	CustomHeap(){
-		heap = new ArrayList<>();
+	public CustomHeap(){
+		@SuppressWarnings("unchecked")
+		List<T> tempHeap = (List<T>) new ArrayList<Object>();
+		heap = tempHeap;
 	}
  
 	@Override
@@ -21,7 +23,8 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 
         while (currIdx > 0 && heap.get(currIdx).compareTo(heap.get(parentIdx)) < 0) {
             swap(currIdx, parentIdx); 
-            currIdx = (currIdx - 1) / 2; 
+            parentIdx = (currIdx - 1) / 2;
+            currIdx = parentIdx; 
         }
 	}
 
