@@ -29,21 +29,27 @@ public class TaskController implements Initializable {
 	@FXML GridPane g_taskGrid;
 	@FXML ScrollPane sp_taskList;
 	
+	private ArrayList<Task> allTasks;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<Task> allTasks = TasksFileUtil.readAllTasks();
+		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
 	}
 
-	public void showAllList() {
+	@FXML
+	private void showAllList() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
+		populatePane(allTasks);
 	}
 	
-	public void showCompletedTask() {
+	@FXML
+	private void showCompletedTask() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
 	}
 	
-	public void showTasksDueToday() {
+	@FXML
+	private void showTasksDueToday() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
@@ -75,6 +81,7 @@ public class TaskController implements Initializable {
 		}
 	}
 	
+	@FXML
 	private void handleCreateTask(ActionEvent event) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));

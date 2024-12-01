@@ -20,11 +20,14 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 
 		int currIdx = heap.size() - 1; 
 		int parentIdx = (currIdx - 1) / 2;
+		
+		System.out.println(currIdx + " " + parentIdx);
 
+		System.out.println("Compare: " + heap.get(currIdx).compareTo(heap.get(parentIdx)));
         while (currIdx > 0 && heap.get(currIdx).compareTo(heap.get(parentIdx)) < 0) {
             swap(currIdx, parentIdx); 
             parentIdx = (currIdx - 1) / 2;
-            currIdx = parentIdx; 
+           // currIdx = parentIdx; 
         }
 	}
 
