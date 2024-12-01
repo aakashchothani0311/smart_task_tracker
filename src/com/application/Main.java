@@ -1,6 +1,9 @@
 package com.application;
 
 import java.io.IOException;
+
+import com.application.util.CustomHeap;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -38,6 +41,15 @@ public class Main extends Application {
 	}*/
 	
 	public static void main(String[] args) {
-		launch(args);		
+		launch(args);	
+		
+		/*CustomHeap<Integer> heap = new CustomHeap<Integer>();
+		int[] temp = new int[] {5, 7, 8, 1, 2,5, 10, -2};
+		
+		for(int t : temp)
+			heap.insert(t);
+		
+		for(int t : heap.toList())
+			System.out.println(t);*/
 	}
 }
