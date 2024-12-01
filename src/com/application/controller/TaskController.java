@@ -3,17 +3,22 @@ package com.application.controller;
 import com.application.model.Task;
 import com.application.util.TasksFileUtil;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class TaskController implements Initializable {
 	
@@ -29,7 +34,7 @@ public class TaskController implements Initializable {
 		ArrayList<Task> allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
 	}
-	
+
 	public void showAllList() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
 	}
@@ -68,5 +73,19 @@ public class TaskController implements Initializable {
 			}
 			sp_taskList.setVisible(true);
 		}
+	}
+	
+	private void handleCreateTask(ActionEvent event) {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
+	        Pane root = loader.load();
+
+	        Stage stage = new Stage();
+	        stage.setTitle("Add New Task");
+	        stage.setScene(new Scene(root));
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 }

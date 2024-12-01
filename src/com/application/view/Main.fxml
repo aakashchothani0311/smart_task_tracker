@@ -49,7 +49,7 @@
                                     <RadioButton fx:id="rb_dueTasks" layoutX="112.0" layoutY="19.0" mnemonicParsing="false" onAction="#showTasksDueToday" text="Tasks Due Today" />
                                  </children>
                               </HBox>
-                              <Button fx:id="b_createTask" layoutX="913.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
+                              <Button fx:id="b_createTask" layoutX="913.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCreateTask" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
                            </children>
                         </Pane>
                         <ScrollPane fx:id="sp_taskList" hbarPolicy="NEVER" layoutX="50.0" layoutY="200.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0">
