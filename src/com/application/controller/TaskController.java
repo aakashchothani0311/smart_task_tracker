@@ -1,5 +1,6 @@
 package com.application.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -7,14 +8,18 @@ import java.util.ResourceBundle;
 import com.application.model.Task;
 import com.application.util.TasksFileUtil;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class TaskController implements Initializable {
 	
@@ -28,8 +33,9 @@ public class TaskController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ArrayList<Task> allTasks = TasksFileUtil.readAllTasks();
 	//	populatePane(allTasks);
+
 	}
-	
+
 	public void showAllList() {
 		toggleRadio("all");
 	}
@@ -66,5 +72,20 @@ public class TaskController implements Initializable {
 		rb_allTasks.setSelected(!option.equals("completed") && !option.equals("due"));
 		rb_completedTasks.setSelected(!option.equals("all") && !option.equals("due"));
 		rb_dueTasks.setSelected(!option.equals("all") && !option.equals("completed"));
+	}
+	
+	@FXML
+	private void handleCreateTask(ActionEvent event) {
+	    try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
+	        Pane root = loader.load();
+
+	        Stage stage = new Stage();
+	        stage.setTitle("Add New Task");
+	        stage.setScene(new Scene(root));
+	        stage.show();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 }
