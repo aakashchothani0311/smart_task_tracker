@@ -47,7 +47,7 @@
                                     <RadioButton fx:id="rb_dueTasks" layoutX="112.0" layoutY="19.0" mnemonicParsing="false" onAction="#showTasksDueToday" text="Tasks Due Today" />
                                  </children>
                               </HBox>
-                              <Button fx:id="b_createTask" layoutX="913.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
+                              <Button fx:id="b_createTask" layoutX="913.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCreateTask" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
                            </children>
                         </Pane>
                         <GridPane gridLinesVisible="true" layoutX="50.0" layoutY="220.0" prefWidth="1000.0">
