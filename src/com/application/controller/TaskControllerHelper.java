@@ -5,6 +5,7 @@ import com.application.model.Task;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -49,10 +50,18 @@ public class TaskControllerHelper {
 		else
 			gp.setStyle("-fx-border-color: #d1d1d1; -fx-border-width: 2; -fx-border-radius: 10");
 		
-		gp.addRow(0, title);
+		gp.add(title, 0, 0);
+		gp.add(desc, 0, 1);
+		gp.setColumnSpan(desc, 2);
+		gp.add(createdDate, 0, 2);
+		gp.add(dueDate, 1, 2);
+		gp.add(bb, 0, 3);
+		gp.setColumnSpan(bb, 2);
+		
+		/*gp.addRow(0, title);
         gp.addRow(1, desc);
         gp.addRow(2, createdDate);
-        gp.addRow(3, bb);
+        gp.addRow(3, bb);*/
 		
 		return gp;	
 	}
