@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.TaskController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.AddTaskController">
    <children>
       <!-- <ImageView fitHeight="383.0" fitWidth="360.0" opacity="0.4" pickOnBounds="true">
          <image>
@@ -38,13 +38,13 @@
             <RowConstraints maxHeight="52.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="85.0" text="Title:">
+            <Label prefHeight="17.0" prefWidth="85.0" text="Title: *">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="taskTitle" style="-fx-border-color: #000000;" GridPane.columnIndex="1" />
-            <Label layoutX="20.0" layoutY="19.0" prefHeight="18.0" prefWidth="109.0" text="Description:" GridPane.rowIndex="1">
+            <Label layoutX="20.0" layoutY="19.0" prefHeight="18.0" prefWidth="109.0" text="Description: *" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -60,7 +60,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label layoutX="20.0" layoutY="147.0" prefHeight="18.0" prefWidth="90.0" text="Due Date:" GridPane.rowIndex="4">
+            <Label layoutX="20.0" layoutY="147.0" prefHeight="18.0" prefWidth="90.0" text="Due Date: *" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
@@ -71,7 +71,7 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </GridPane>
-      <Button fx:id="b_addTask" layoutX="158.0" layoutY="316.0" mnemonicParsing="false" style="-fx-background-color: #0056b3;" text="Add" textFill="WHITE">
+      <Button fx:id="b_addTask" layoutX="158.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddTask" style="-fx-background-color: #0056b3;" text="Add" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Button>
