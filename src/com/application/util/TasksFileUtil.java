@@ -2,9 +2,11 @@ package com.application.util;
 
 import com.application.model.Task;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,7 +83,40 @@ public class TasksFileUtil {
 	        System.err.println("Failed to delete original file.");
 	    }
 	}
-
+	
+	public static void deleteTask(int taskId) {
+		File originalFile = new File(filePath);
+		File tempFile = new File(filePath + ".tmp");
+		
+		try (
+			BufferedReader reader = new BufferedReader(new FileReader(originalFile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+				
+			String currentLine;
+			boolean taskDeleted = false;
+			
+			while((currentLine = reader.readLine()) != null) {
+				String[] lineSplit = currentLine.split("\\|\\|");
+				int uid = Integer.parseInt(lineSplit[0].strip());
+				
+				if(uid == taskId) {
+					taskDeleted = true;
+				}else {
+					writer.write(currentLine + System.lineSeparator());
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(!originalFile.delete()) {
+			System.err.println("Failed to delete the original file.");
+		}
+		
+		if(!tempFile.renameTo(originalFile)) {
+			System.err.println("Failed to rename the temporary file.");
+		}
+}
     private static String formatTask(Task task) {
         return task.getUID() + "||" +
         	   task.getTitle() + "||" +
