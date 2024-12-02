@@ -29,33 +29,45 @@ public class TaskController implements Initializable {
 	@FXML GridPane g_taskGrid;
 	@FXML ScrollPane sp_taskList;
 	
+	private static ArrayList<Task> allTasks;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<Task> allTasks = TasksFileUtil.readAllTasks();
+		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
 	}
 
-	public void showAllList() {
+	@FXML
+	private void showAllList() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
+		populatePane(allTasks);
 	}
 	
-	public void showCompletedTask() {
+	@FXML
+	private void showCompletedTask() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
 	}
 	
-	public void showTasksDueToday() {
+	@FXML
+	private void showTasksDueToday() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
 	@FXML
 	private void handleCreateTask(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/AddTask.fxml"));
-        Pane root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setTitle("Add New Task");
-        stage.setScene(new Scene(root));
-        stage.show();
+	    Pane root = FXMLLoader.load(getClass().getResource("/com/application/view/AddTask.fxml"));
+	    
+	    Stage stage = new Stage();
+	    stage.setTitle("Add New Task");
+	    stage.setScene(new Scene(root));
+	    stage.show();
+	    
+	    AddTaskController.setTaskController(this);
+	}
+	
+	public void handleAdd(Task task) {
+		allTasks.add(task);
+        populatePane(allTasks);
 	}
 	
 	void editTask(ActionEvent evt) {
@@ -85,5 +97,4 @@ public class TaskController implements Initializable {
 			sp_taskList.setVisible(true);
 		}
 	}
-	
 }

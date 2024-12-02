@@ -38,13 +38,13 @@
             <RowConstraints maxHeight="52.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="85.0" text="Title:">
+            <Label prefHeight="17.0" prefWidth="85.0" text="Title: *">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="taskTitle" style="-fx-border-color: #000000;" GridPane.columnIndex="1" />
-            <Label layoutX="20.0" layoutY="19.0" prefHeight="18.0" prefWidth="109.0" text="Description:" GridPane.rowIndex="1">
+            <Label layoutX="20.0" layoutY="19.0" prefHeight="18.0" prefWidth="109.0" text="Description: *" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -60,7 +60,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Label layoutX="20.0" layoutY="147.0" prefHeight="18.0" prefWidth="90.0" text="Due Date:" GridPane.rowIndex="4">
+            <Label layoutX="20.0" layoutY="147.0" prefHeight="18.0" prefWidth="90.0" text="Due Date: *" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
