@@ -26,8 +26,8 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 		System.out.println("Compare: " + heap.get(currIdx).compareTo(heap.get(parentIdx)));
         while (currIdx > 0 && heap.get(currIdx).compareTo(heap.get(parentIdx)) < 0) {
             swap(currIdx, parentIdx); 
+            currIdx = parentIdx;
             parentIdx = (currIdx - 1) / 2;
-           // currIdx = parentIdx; 
         }
 	}
 
