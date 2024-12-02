@@ -55,7 +55,7 @@ public class AddTaskController implements Initializable {
             return;
         }
         
-        Task newTask = new Task(title, description, dueTask);
+        Task newTask = new Task(20, title, description, dueTask);
         TasksFileUtil.saveTask(newTask);
         taskController.handleAdd(newTask);
         
