@@ -26,7 +26,7 @@ public class TaskControllerHelper {
 		createdDate.setText("Created Date: " + task.getCreatedDate());
 		
 		Text dueDate = new Text();
-		dueDate.setText("Due Date: " + task.getCreatedDate());
+		dueDate.setText("Due Date: " + task.getDueDate());
 		
 		Button edit = createTaskAction("EDIT", String.valueOf(task.getUID()), "#0288d1");
 		edit.setOnAction(evt -> controller.editTask(evt));
