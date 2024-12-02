@@ -71,7 +71,32 @@ public class TaskController implements Initializable {
 	}
 	
 	void editTask(ActionEvent evt) {
-		System.out.println("Edit");
+	    Button source = (Button) evt.getSource();
+	    int taskId = Integer.parseInt(source.getId());
+	    
+	    Task taskToEdit = allTasks.stream().filter(t -> t.getUID() == taskId).findFirst().orElse(null);
+	    
+	    if (taskToEdit != null) {
+	        try {
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/EditTask.fxml"));
+	            Pane root = loader.load();
+	            
+	            EditTaskController editController = loader.getController();
+	            editController.setTask(taskToEdit);
+	            editController.setTaskController(this);
+
+	            Stage stage = new Stage();
+	            stage.setTitle("Edit Task");
+	            stage.setScene(new Scene(root));
+	            stage.show();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+	public void handleEdit() {
+	    populatePane(allTasks);
 	}
 	
 	void deleteTask(ActionEvent evt) {
