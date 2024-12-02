@@ -5,10 +5,8 @@ import com.application.model.Task;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -27,13 +25,14 @@ public class TasksFileUtil {
 				String line = fin.nextLine();
 				String[] lineSplit = formatString(line).split("\\|\\|");
 				
-				String title = formatString(lineSplit[0]);
-				String desc = formatString(lineSplit[1]);
-				boolean isCompleted = formatString(lineSplit[2]).equals("true") ? true : false;
-				LocalDate createdDate = LocalDate.parse(formatString(lineSplit[3]), formatter);
-				LocalDate dueDate = LocalDate.parse(formatString(lineSplit[4]), formatter);
+				int uid = Integer.parseInt(lineSplit[0]);
+				String title = formatString(lineSplit[1]);
+				String desc = formatString(lineSplit[2]);
+				boolean isCompleted = formatString(lineSplit[3]).equals("true") ? true : false;
+				LocalDate createdDate = LocalDate.parse(formatString(lineSplit[4]), formatter);
+				LocalDate dueDate = LocalDate.parse(formatString(lineSplit[5]), formatter);
 				
-				allTasks.add(new Task(title, desc, isCompleted, createdDate, dueDate));
+				allTasks.add(new Task(uid, title, desc, isCompleted, createdDate, dueDate));
 			}
 			
 			return allTasks;
@@ -58,7 +57,8 @@ public class TasksFileUtil {
     }
 
     private static String formatTask(Task task) {
-        return task.getTitle() + "||" +
+        return task.getUID() + "||" +
+        	   task.getTitle() + "||" +
                task.getDesc() + "||" +
                task.isCompleted() + "||" +
                task.getCreatedDate().format(formatter) + "||" +

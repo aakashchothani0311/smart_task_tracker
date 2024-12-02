@@ -28,13 +28,13 @@ public class TaskControllerHelper {
 		Text dueDate = new Text();
 		dueDate.setText("Due Date: " + task.getDueDate());
 		
-		Button edit = createTaskAction("EDIT", "#0288d1");
+		Button edit = createTaskAction("EDIT", String.valueOf(task.getUID()), "#0288d1");
 		edit.setOnAction(evt -> controller.editTask(evt));
 		
-		Button delete = createTaskAction("DELETE", "#d32f2f");
+		Button delete = createTaskAction("DELETE", String.valueOf(task.getUID()), "#d32f2f");
 		delete.setOnAction(evt -> controller.deleteTask(evt));
 		
-		Button complete = createTaskAction("MARK COMPLETE", "#2e7d32");
+		Button complete = createTaskAction("MARK COMPLETE", String.valueOf(task.getUID()), "#2e7d32");
 		complete.setOnAction(evt -> controller.markComplete(evt));
 		
 		ButtonBar bb = new ButtonBar();
@@ -58,16 +58,12 @@ public class TaskControllerHelper {
 		gp.add(bb, 0, 3);
 		gp.setColumnSpan(bb, 2);
 		
-		/*gp.addRow(0, title);
-        gp.addRow(1, desc);
-        gp.addRow(2, createdDate);
-        gp.addRow(3, bb);*/
-		
 		return gp;	
 	}
 	
-	private static Button createTaskAction(String label, String bgColor) {
+	private static Button createTaskAction(String label, String id, String bgColor) {
 		Button b = new Button(label);
+		b.setId(id);
 		b.setStyle("-fx-background-color: " + bgColor);
 		b.setTextFill(javafx.scene.paint.Color.WHITE);
 		b.setFont(new Font("System Bold", 13.0));

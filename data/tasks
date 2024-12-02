@@ -1,24 +1,22 @@
-INFO 6205 Assignment 1||Create a simple task tracker application using JavaScript. Each task should have a title, description, and creation date. Lorem ipsum dolor sit amet consectetur adipisicing elit.||false||06/12/2024||12/12/2024
-INFO 6205 Assignment 2||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||true||06/05/2024||10/05/2024
-INFO 6205 Assignment 3||Add layout on Assignment 3 web page as per the mock image and convert all CSS to SCSS syntax. The goal of this assignment is to learn about CSS positioning, Grid layout & Flexbox, and SCSS features like variables, mixins, inheritance, control statements, functions, operators, etc.||false||05/29/2024||12/12/2024
-INFO 6205 Assignment 4||The goal of this assignment is to learn about CSS Selectors, properties, Combinators, Pseudo-classes, Pseudo-elements, flexbox and Box model. Use CSS class and tag selectors. JavaScript is not required. This will not add more grade points. All individual elements should look very close to the Assignment 2 image. You should not use the table element for formatting. You should add code documentation using CSS comments. You can also use any open-source fonts.||false||05/22/2024||01/05/2025
-INFO 6205 Assignment 5||Build an HTML document for the attached web page design. The goal of this assignment is to learn about HTML elements and attributes. Should use an HTML form element for the form section. CSS and JavaScript are not required even if the page does not look like the mock image. Layout and styling are not required.||true||05/15/2024||06/15/2024
-INFO 6205 Assignment 6||This assignment requires setting up git along with NodeJS & Mongo Compass installation. The index.html file lists all the tasks completed as part of this assignment.||true||08/05/2024||09/04/2024
-Task 8||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||false||06/12/2024||12/12/2024
-Task 9||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||false||06/12/2024||12/05/2024
-Task 10||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||true||06/12/2024||12/08/2024
-Fill Availability||RSO availibity||false||12/01/2024||12/03/2024
-Fill Availability||RSO availibity||false||12/01/2024||12/03/2024
-Mann Patel||Master's in Software Engineering SYstems||false||12/01/2024||12/11/2024
-Aakash Chothani||Student at Northeastern in Software Engineering Systems.||false||12/01/2024||12/11/2024
-wefdfs||sfdgfdhjtrcrdfgvhkhjdz||false||12/01/2024||12/06/2024
-tas223344||task565677||false||12/01/2024||12/31/2024
-tas223344||task565677||false||12/01/2024||12/31/2024
-tas223344||task565677||false||12/01/2024||12/09/2024
-Hello World||Welcome to GOA SINGHAM !!!||false||12/01/2024||12/18/2024
-ewknfiuvbnrive||dcevf ekn gjwjbevf am,wjse amkcjw kevasc, dkvjb||false||12/01/2024||12/31/2024
-sdfghfdsadsSASDF||ASFDGFSASDFGHBVCXERFGBDSCXAzaxs||false||12/01/2024||12/03/2024
-ajahdbvshjdcvbsjdabiubcwbc dcss||asdncac wbcb wqj csvw eqkj cj sc||false||12/01/2024||12/17/2024
-add222333||4455ffdd||false||12/01/2024||12/18/2024
-kjabdwoedb||qjsd kqbdqd||false||12/01/2024||12/25/2024
-Hey||Mann here||false||12/01/2024||12/18/2024
+1||INFO 6205 Assignment 1||Create a simple task tracker application using JavaScript. Each task should have a title, description, and creation date. Lorem ipsum dolor sit amet consectetur adipisicing elit.||false||06/12/2024||12/12/2024
+2||INFO 6205 Assignment 2||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||true||06/05/2024||10/05/2024
+3||INFO 6205 Assignment 3||Add layout on Assignment 3 web page as per the mock image and convert all CSS to SCSS syntax. The goal of this assignment is to learn about CSS positioning, Grid layout & Flexbox, and SCSS features like variables, mixins, inheritance, control statements, functions, operators, etc.||false||05/29/2024||12/12/2024
+4||INFO 6205 Assignment 4||The goal of this assignment is to learn about CSS Selectors, properties, Combinators, Pseudo-classes, Pseudo-elements, flexbox and Box model. Use CSS class and tag selectors. JavaScript is not required. This will not add more grade points. All individual elements should look very close to the Assignment 2 image. You should not use the table element for formatting. You should add code documentation using CSS comments. You can also use any open-source fonts.||false||05/22/2024||01/05/2025
+5||INFO 6205 Assignment 5||Build an HTML document for the attached web page design. The goal of this assignment is to learn about HTML elements and attributes. Should use an HTML form element for the form section. CSS and JavaScript are not required even if the page does not look like the mock image. Layout and styling are not required.||true||05/15/2024||06/15/2024
+6||INFO 6205 Assignment 6||This assignment requires setting up git along with NodeJS & Mongo Compass installation. The index.html file lists all the tasks completed as part of this assignment.||true||08/05/2024||09/04/2024
+7||Task 8||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||false||06/12/2024||12/12/2024
+8||Task 9||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||false||06/12/2024||12/05/2024
+9||Task 10||Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores modi, repellat reiciendis animi explicabo ipsam suscipit iusto inventore at commodi consequuntur quaerat accusantium delectus, quidem tempore, illo vero amet sapiente! Quasi, magnam eaque ipsa cupiditate perspiciatis temporibus fugiat? Dolorem, rem!||true||06/12/2024||12/08/2024
+10||Fill Availability||RSO availibity||false||12/01/2024||12/03/2024
+11||Fill Availability||RSO availibity||false||12/01/2024||12/03/2024
+12||Mann Patel||Master's in Software Engineering SYstems||false||12/01/2024||12/11/2024
+13||Aakash Chothani||Student at Northeastern in Software Engineering Systems.||false||12/01/2024||12/11/2024
+14||wefdfs||sfdgfdhjtrcrdfgvhkhjdz||false||12/01/2024||12/06/2024
+15||tas223344||task565677||false||12/01/2024||12/31/2024
+16||Hello World||Welcome to GOA SINGHAM !!!||false||12/01/2024||12/18/2024
+17||ewknfiuvbnrive||dcevf ekn gjwjbevf am,wjse amkcjw kevasc, dkvjb||false||12/01/2024||12/31/2024
+18||sdfghfdsadsSASDF||ASFDGFSASDFGHBVCXERFGBDSCXAzaxs||false||12/01/2024||12/03/2024
+19||ajahdbvshjdcvbsjdabiubcwbc dcss||asdncac wbcb wqj csvw eqkj cj sc||false||12/01/2024||12/17/2024
+20||add222333||4455ffdd||false||12/01/2024||12/18/2024
+21||kjabdwoedb||qjsd kqbdqd||false||12/01/2024||12/25/2024
+22||Hey||Mann here||false||12/01/2024||12/18/2024
