@@ -101,6 +101,17 @@ public class TaskController implements Initializable {
 	
 	void deleteTask(ActionEvent evt) {
 		System.out.println("Delete");
+		
+		Button source = (Button)evt.getSource();
+		int taskID = Integer.parseInt(source.getId());
+		
+		boolean taskRemoved = allTasks.removeIf(task -> task.getUID() == taskID);
+		
+		if(taskRemoved) {
+			TasksFileUtil.deleteTask(taskID);
+			
+			populatePane(allTasks);
+		}
 	}
 	
 	void markComplete(ActionEvent evt) {
