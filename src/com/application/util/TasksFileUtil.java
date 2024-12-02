@@ -44,17 +44,43 @@ public class TasksFileUtil {
 	}
 	
 	public static void saveTask(Task task) {
-        appendTaskToFile(task);
-    }
+	    File file = new File(filePath);
+	    File tempFile = new File(filePath + ".tmp");
 
-    private static void appendTaskToFile(Task task) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String taskLine = formatTask(task);
-            writer.write(taskLine);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+	         Scanner scanner = new Scanner(file)) {
+
+	        boolean taskUpdated = false;
+
+	        while (scanner.hasNextLine()) {
+	            String line = scanner.nextLine();
+	            String[] lineSplit = line.split("\\|\\|");
+	            int uid = Integer.parseInt(lineSplit[0].strip());
+
+	            if (uid == task.getUID()) {
+	                writer.write(formatTask(task));
+	                taskUpdated = true;
+	            } else {
+	                writer.write(line + System.lineSeparator());
+	            }
+	        }
+
+	        if (!taskUpdated) {
+	            writer.write(formatTask(task));
+	        }
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    if (file.delete()) {
+	        if (!tempFile.renameTo(file)) {
+	            System.err.println("Failed to rename temp file to original file.");
+	        }
+	    } else {
+	        System.err.println("Failed to delete original file.");
+	    }
+	}
 
     private static String formatTask(Task task) {
         return task.getUID() + "||" +
