@@ -1,8 +1,6 @@
 package com.application.controller;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import com.application.model.Task;
 import com.application.util.TasksFileUtil;
@@ -24,29 +22,29 @@ public class EditTaskController {
 	@FXML DatePicker dueDate;
 	
 	private Task task;
+	private TaskController taskController;
 	
-	private static TaskController taskController;
-	
-	public static void setTaskController(TaskController controller) {
+	public void setTaskController(TaskController controller) {
 	    taskController = controller;
 	}
 	
 	public void setTask(Task task) {
-		this.task  = task;
+		this.task = task;
 		
 		taskTitle.setText(task.getTitle());
 		taskDesc.setText(task.getDesc());
 		createdDate.setText(task.getCreatedDate().toString());
-		dueDate.setPromptText(task.getDueDate().toString());
+		dueDate.setValue(task.getDueDate());
 	}
 	
 	@FXML
-	public void handleSave() {
+	private void handleTaskUpdate() {
 		String title = taskTitle.getText();
 		String desc = taskDesc.getText();
+		LocalDate dd = dueDate.getValue();
 		
-		if(title == null ||title.trim().isEmpty()) {
-			UtilClass.showAlert(AlertType.ERROR,"Error", "Invalid Input", "Title field cannot be empty." );
+		if(title == null || title.trim().isEmpty()) {
+			UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Title field cannot be empty.");
 			return;
 		}
 		
@@ -55,17 +53,17 @@ public class EditTaskController {
 			return;
 		}
 		
+		if(dd == null) {
+			UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due Date field cannot be empty.");
+			return;
+		}		
+		
 	    task.setTitle(title);
 	    task.setDesc(taskDesc.getText());
-	    
-	    if (dueDate.getValue() != null) {
-	        task.setDueDate(dueDate.getValue());
-	    }
-	    
-	    if (taskController != null) {
-	        taskController.handleEdit();
-	    }
-	    TasksFileUtil.updateTask(task);
+	    task.setDueDate(dd);
+	        
+	    TasksFileUtil.updateTaskInFile(task);
+	    taskController.handleEdit();
 
 	    Stage stage = (Stage) taskTitle.getScene().getWindow();
 	    stage.close();

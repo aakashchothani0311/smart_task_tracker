@@ -77,16 +77,20 @@ public class TaskControllerHelper {
 		return b;
 	}
 	
-	void showDialog(String viewName, String title) {
+	Object showDialog(String viewName, String title) {
 	    try {
-			Pane root = FXMLLoader.load(getClass().getResource(viewPath + viewName));
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath + viewName));
+	        Pane root = loader.load();
 			
 			Stage stage = new Stage();
 		    stage.setTitle(title);
 		    stage.setScene(new Scene(root));
 		    stage.show();
+		    
+		    return loader.getController();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
