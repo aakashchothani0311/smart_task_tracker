@@ -136,7 +136,6 @@ public class TaskController implements Initializable {
 	}
 	
 	
-	
 	void markComplete(ActionEvent evt) {
 		System.out.println("Complete");
 
@@ -201,6 +200,8 @@ public class TaskController implements Initializable {
 			sp_taskList.setVisible(true);
 		}
 	}
+	
+	
 	
 	
 }

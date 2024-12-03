@@ -40,8 +40,6 @@ public class TaskControllerHelper {
 		complete.setOnAction(evt -> controller.markComplete(evt));
 		
 		
-		
-		
 		bb.getButtons().addAll(edit, delete, complete);
 		}
 		 
