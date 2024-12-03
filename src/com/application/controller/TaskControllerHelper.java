@@ -1,19 +1,26 @@
 package com.application.controller;
 
+import java.io.IOException;
+
 import com.application.model.Task;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class TaskControllerHelper {
 	
-	static GridPane createTaskCard(Task task, TaskController controller) {
+	private static String viewPath = "/com/application/view/";
+	
+	GridPane createTaskCard(Task task, TaskController controller) {
 		Text title = new Text();
 		title.setFont(new Font(24));
 		title.setText(task.getTitle());
@@ -61,7 +68,7 @@ public class TaskControllerHelper {
 		return gp;	
 	}
 	
-	private static Button createTaskAction(String label, String id, String bgColor) {
+	private Button createTaskAction(String label, String id, String bgColor) {
 		Button b = new Button(label);
 		b.setId(id);
 		b.setStyle("-fx-background-color: " + bgColor);
@@ -70,7 +77,20 @@ public class TaskControllerHelper {
 		return b;
 	}
 	
-	static void toggleRadio(RadioButton rb_allTasks, RadioButton rb_completedTasks, RadioButton rb_dueTasks, String option) {
+	void showDialog(String viewName, String title) {
+	    try {
+			Pane root = FXMLLoader.load(getClass().getResource(viewPath + viewName));
+			
+			Stage stage = new Stage();
+		    stage.setTitle(title);
+		    stage.setScene(new Scene(root));
+		    stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void toggleRadio(RadioButton rb_allTasks, RadioButton rb_completedTasks, RadioButton rb_dueTasks, String option) {
 		rb_allTasks.setSelected(!option.equals("completed") && !option.equals("due"));
 		rb_completedTasks.setSelected(!option.equals("all") && !option.equals("due"));
 		rb_dueTasks.setSelected(!option.equals("all") && !option.equals("completed"));

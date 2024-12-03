@@ -29,39 +29,36 @@ public class TaskController implements Initializable {
 	@FXML GridPane g_taskGrid;
 	@FXML ScrollPane sp_taskList;
 	
+	private TaskControllerHelper helper;
 	private static ArrayList<Task> allTasks;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		helper = new TaskControllerHelper();
+		
 		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
 	}
 
 	@FXML
 	private void showAllList() {
-		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
 		populatePane(allTasks);
 	}
 	
 	@FXML
 	private void showCompletedTask() {
-		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
 	}
 	
 	@FXML
 	private void showTasksDueToday() {
-		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
 	@FXML
 	private void handleCreateTask(ActionEvent event) throws IOException {
-	    Pane root = FXMLLoader.load(getClass().getResource("/com/application/view/AddTask.fxml"));
-	    
-	    Stage stage = new Stage();
-	    stage.setTitle("Add New Task");
-	    stage.setScene(new Scene(root));
-	    stage.show();
-	    
+		helper.showDialog("AddTask.fxml", "Add New Task");
 	    AddTaskController.setTaskController(this);
 	}
 	
@@ -77,21 +74,11 @@ public class TaskController implements Initializable {
 	    Task taskToEdit = allTasks.stream().filter(t -> t.getUID() == taskId).findFirst().orElse(null);
 	    
 	    if (taskToEdit != null) {
-	        try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/application/view/EditTask.fxml"));
-	            Pane root = loader.load();
-	            
-	            EditTaskController editController = loader.getController();
-	            editController.setTask(taskToEdit);
-	            editController.setTaskController(this);
-
-	            Stage stage = new Stage();
-	            stage.setTitle("Edit Task");
-	            stage.setScene(new Scene(root));
-	            stage.show();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	    	helper.showDialog("EditTask.fxml", "Edit Task");
+	        	            
+//            EditTaskController editController = loader.getController();
+//            editController.setTask(taskToEdit);
+//            editController.setTaskController(this);
 	    }
 	}
 	
@@ -100,8 +87,6 @@ public class TaskController implements Initializable {
 	}
 	
 	void deleteTask(ActionEvent evt) {
-		System.out.println("Delete");
-		
 		Button source = (Button)evt.getSource();
 		int taskID = Integer.parseInt(source.getId());
 		
@@ -109,7 +94,6 @@ public class TaskController implements Initializable {
 		
 		if(taskRemoved) {
 			TasksFileUtil.deleteTask(taskID);
-			
 			populatePane(allTasks);
 		}
 	}
@@ -118,7 +102,7 @@ public class TaskController implements Initializable {
 		System.out.println("complete");
 	}
 	
-	private void populatePane(ArrayList<Task> taskList) {
+	public void populatePane(ArrayList<Task> taskList) {
 		g_taskGrid.getChildren().clear();
 		
 		int size = taskList.size();
@@ -128,7 +112,7 @@ public class TaskController implements Initializable {
 		} else {
 			for(int i = 0; i < size; i++) {
 				Task task = taskList.get(i);
-				g_taskGrid.addRow(i, TaskControllerHelper.createTaskCard(task, this));
+				g_taskGrid.addRow(i, helper.createTaskCard(task, this));
 			}
 			sp_taskList.setVisible(true);
 		}
