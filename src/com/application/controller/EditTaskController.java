@@ -57,10 +57,9 @@ public class EditTaskController {
 		
 	    task.setTitle(title);
 	    task.setDesc(taskDesc.getText());
+	    
 	    if (dueDate.getValue() != null) {
 	        task.setDueDate(dueDate.getValue());
-	    } else {
-	        task.setDueDate(LocalDate.now());
 	    }
 	    
 	    if (taskController != null) {
