@@ -14,7 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
@@ -134,6 +137,44 @@ public class TaskController implements Initializable {
 	
 	void markComplete(ActionEvent evt) {
 		System.out.println("complete");
+		Button source = (Button) evt.getSource();
+	    int taskId = Integer.parseInt(source.getId());
+
+	    // Find the task in the allTasks list
+	    Task taskToComplete = allTasks.stream()
+	                                   .filter(t -> t.getUID() == taskId)
+	                                   .findFirst()
+	                                   .orElse(null);
+
+	    if (taskToComplete != null) {
+	        
+	    	
+	    	//Confirmation dialog
+	        Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
+	        confirmationAlert.setTitle("Confirm Completion");
+	        confirmationAlert.setHeaderText("Are you sure you want to complete this task?");
+	        confirmationAlert.setContentText("Once completed, this task cannot be undone.");
+
+	        //Display confirmation dialog
+	        ButtonType result = confirmationAlert.showAndWait().orElse(ButtonType.CANCEL);
+
+	        // IF YES
+	        if (result == ButtonType.OK) {
+	            taskToComplete.setCompleted(true); 
+	            TasksFileUtil.saveTask(taskToComplete);
+
+	            //Refresh List
+	            if (rb_allTasks.isSelected()) {
+	                populatePane(allTasks);
+	            } else if (rb_dueTasks.isSelected()) {
+	                showTasksDueToday();
+
+	            
+	            } else {
+	            System.out.println("Task completion canceled.");
+	        }
+	        }
+	       }
 	}
 	
 	private void populatePane(ArrayList<Task> taskList) {

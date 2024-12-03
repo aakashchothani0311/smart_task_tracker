@@ -37,6 +37,8 @@ public class TaskControllerHelper {
 		Button complete = createTaskAction("MARK COMPLETE", String.valueOf(task.getUID()), "#2e7d32");
 		complete.setOnAction(evt -> controller.markComplete(evt));
 		
+		
+		
 		ButtonBar bb = new ButtonBar();
 		bb.getButtons().addAll(edit, delete, complete);
 		 
@@ -75,4 +77,6 @@ public class TaskControllerHelper {
 		rb_completedTasks.setSelected(!option.equals("all") && !option.equals("due"));
 		rb_dueTasks.setSelected(!option.equals("all") && !option.equals("completed"));
 	}
+	
+	
 }
