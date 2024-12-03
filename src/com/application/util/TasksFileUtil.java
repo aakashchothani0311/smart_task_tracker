@@ -20,32 +20,6 @@ public class TasksFileUtil {
 	private static String filePath = "data/tasks";
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 	
-//	public static ArrayList<Task> readAllTasks() {
-//		ArrayList<Task> allTasks = new ArrayList<>();
-//		
-//		try(Scanner fin = new Scanner(new File(filePath))){     
-//			while(fin.hasNextLine()) {
-//				String line = fin.nextLine();
-//				String[] lineSplit = formatString(line).split("\\|\\|");
-//				
-//				int uid = Integer.parseInt(lineSplit[0]);
-//				String title = formatString(lineSplit[1]);
-//				String desc = formatString(lineSplit[2]);
-//				boolean isCompleted = formatString(lineSplit[3]).equals("true") ? true : false;
-//				LocalDate createdDate = LocalDate.parse(formatString(lineSplit[4]), formatter);
-//				LocalDate dueDate = LocalDate.parse(formatString(lineSplit[5]), formatter);
-//				
-//				allTasks.add(new Task(uid, title, desc, isCompleted, createdDate, dueDate));
-//			}
-//			
-//			return allTasks;
-//		} catch (FileNotFoundException e) {
-//			System.out.println("File tasks not found");
-//		}
-//		
-//		return null;
-//	}
-	
 	public static ArrayList<Task> readAllTasks() {
 	    ArrayList<Task> allTasks = new ArrayList<>();
 
