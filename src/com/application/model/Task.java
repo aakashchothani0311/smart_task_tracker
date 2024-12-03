@@ -7,18 +7,20 @@ public class Task {
 	private String title;
 	private String desc;
 	private boolean isCompleted;
+	private String priority;
 	private LocalDate createdDate;
 	private LocalDate dueDate;
 	
-	public Task(int uid, String title, String desc, LocalDate dueDate){
-		this(uid, title, desc, false, LocalDate.now(), dueDate);
+	public Task(String title, String desc, String priority, LocalDate dueDate){
+		this(0, title, desc, false, priority, LocalDate.now(), dueDate);
 	}
 	
-	public Task(int uid, String title, String desc, boolean isCompleted, LocalDate createdDate, LocalDate dueDate){
+	public Task(int uid, String title, String desc, boolean isCompleted, String priority, LocalDate createdDate, LocalDate dueDate){
 		this.uid = uid;
 		this.title = title;
 		this.desc = desc;
 		this.isCompleted = isCompleted;
+		this.priority = priority;
 		this.createdDate = createdDate;
 		this.dueDate = dueDate;
 	}
@@ -53,6 +55,14 @@ public class Task {
 	
 	public void setCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
+	}
+	
+	public String getPriority() {
+		return priority;
+	}
+	
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 	
 	public LocalDate getCreatedDate() {

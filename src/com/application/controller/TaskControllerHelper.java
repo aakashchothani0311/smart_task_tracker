@@ -29,6 +29,9 @@ public class TaskControllerHelper {
 		desc.setText(task.getDesc());
 		desc.setWrappingWidth(800.0);
 		
+		Text priority = new Text();
+		priority.setText("Priority: " + task.getPriority());
+		
 		Text createdDate = new Text();
 		createdDate.setText("Created Date: " + task.getCreatedDate());
 		
@@ -54,16 +57,23 @@ public class TaskControllerHelper {
 		
 		if(task.isCompleted())
 			gp.setStyle("-fx-border-color: #3edd1e; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: #f4fff2");
-		else
-			gp.setStyle("-fx-border-color: #d1d1d1; -fx-border-width: 2; -fx-border-radius: 10");
+		else {
+			if(task.getPriority().equals("High"))
+				gp.setStyle("-fx-border-color: #d32f2f; -fx-border-width: 2; -fx-border-radius: 10");
+			else if(task.getPriority().equals("Medium"))
+				gp.setStyle("-fx-border-color: #ffbf00; -fx-border-width: 2; -fx-border-radius: 10");
+			else
+				gp.setStyle("-fx-border-color: #d1d1d1; -fx-border-width: 2; -fx-border-radius: 10");
+		}
 		
 		gp.add(title, 0, 0);
 		gp.add(desc, 0, 1);
-		gp.setColumnSpan(desc, 2);
-		gp.add(createdDate, 0, 2);
-		gp.add(dueDate, 1, 2);
+		gp.setColumnSpan(desc, 3);
+		gp.add(priority, 0, 2);
+		gp.add(createdDate, 1, 2);
+		gp.add(dueDate, 2, 2);
 		gp.add(bb, 0, 3);
-		gp.setColumnSpan(bb, 2);
+		gp.setColumnSpan(bb, 3);
 		
 		return gp;	
 	}
