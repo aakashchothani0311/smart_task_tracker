@@ -2,9 +2,11 @@ package com.application.util;
 
 import com.application.model.Task;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,18 +46,77 @@ public class TasksFileUtil {
 	}
 	
 	public static void saveTask(Task task) {
-        appendTaskToFile(task);
-    }
+	    File file = new File(filePath);
+	    File tempFile = new File(filePath + ".tmp");
 
-    private static void appendTaskToFile(Task task) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String taskLine = formatTask(task);
-            writer.write(taskLine);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+	         Scanner scanner = new Scanner(file)) {
 
+	        boolean taskUpdated = false;
+
+	        while (scanner.hasNextLine()) {
+	            String line = scanner.nextLine();
+	            String[] lineSplit = line.split("\\|\\|");
+	            int uid = Integer.parseInt(lineSplit[0].strip());
+
+	            if (uid == task.getUID()) {
+	                writer.write(formatTask(task));
+	                taskUpdated = true;
+	            } else {
+	                writer.write(line + System.lineSeparator());
+	            }
+	        }
+
+	        if (!taskUpdated) {
+	            writer.write(formatTask(task));
+	        }
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    if (file.delete()) {
+	        if (!tempFile.renameTo(file)) {
+	            System.err.println("Failed to rename temp file to original file.");
+	        }
+	    } else {
+	        System.err.println("Failed to delete original file.");
+	    }
+	}
+	
+	public static void deleteTask(int taskId) {
+		File originalFile = new File(filePath);
+		File tempFile = new File(filePath + ".tmp");
+		
+		try (
+			BufferedReader reader = new BufferedReader(new FileReader(originalFile));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+				
+			String currentLine;
+			boolean taskDeleted = false;
+			
+			while((currentLine = reader.readLine()) != null) {
+				String[] lineSplit = currentLine.split("\\|\\|");
+				int uid = Integer.parseInt(lineSplit[0].strip());
+				
+				if(uid == taskId) {
+					taskDeleted = true;
+				}else {
+					writer.write(currentLine + System.lineSeparator());
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(!originalFile.delete()) {
+			System.err.println("Failed to delete the original file.");
+		}
+		
+		if(!tempFile.renameTo(originalFile)) {
+			System.err.println("Failed to rename the temporary file.");
+		}
+}
     private static String formatTask(Task task) {
         return task.getUID() + "||" +
         	   task.getTitle() + "||" +
