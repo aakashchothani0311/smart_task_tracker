@@ -66,7 +66,7 @@ public class EditTaskController {
 	    if (taskController != null) {
 	        taskController.handleEdit();
 	    }
-	    TasksFileUtil.saveTask(task);
+	    TasksFileUtil.updateTask(task);
 
 	    Stage stage = (Stage) taskTitle.getScene().getWindow();
 	    stage.close();
