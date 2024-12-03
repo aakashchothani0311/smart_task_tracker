@@ -56,7 +56,7 @@ public class AddTaskController implements Initializable {
         }
         
         Task newTask = new Task(20, title, description, dueTask);
-        TasksFileUtil.saveTask(newTask);
+        TasksFileUtil.appendTaskToFile(newTask);
         taskController.handleAdd(newTask);
         
         Stage stage = (Stage) taskTitle.getScene().getWindow();

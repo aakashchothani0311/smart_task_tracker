@@ -10,15 +10,11 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public class TaskController implements Initializable {
 	
@@ -35,6 +31,7 @@ public class TaskController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		helper = new TaskControllerHelper();
+		
 		
 		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
@@ -62,7 +59,7 @@ public class TaskController implements Initializable {
 	    AddTaskController.setTaskController(this);
 	}
 	
-	public void handleAdd(Task task) {
+	void handleAdd(Task task) {
 		allTasks.add(task);
         populatePane(allTasks);
 	}
@@ -71,18 +68,17 @@ public class TaskController implements Initializable {
 	    Button source = (Button) evt.getSource();
 	    int taskId = Integer.parseInt(source.getId());
 	    
-	    Task taskToEdit = allTasks.stream().filter(t -> t.getUID() == taskId).findFirst().orElse(null);
-	    
-	    if (taskToEdit != null) {
-	    	helper.showDialog("EditTask.fxml", "Edit Task");
-	        	            
-//            EditTaskController editController = loader.getController();
-//            editController.setTask(taskToEdit);
-//            editController.setTaskController(this);
+	    for(Task taskToEdit : allTasks) {
+	    	if(taskToEdit.getUID() == taskId) {
+	    		EditTaskController et = (EditTaskController) helper.showDialog("EditTask.fxml", "Edit Task");
+	    		et.setTaskController(this);
+	    		et.setTask(taskToEdit);
+	    		break;
+	    	}
 	    }
 	}
 	
-	public void handleEdit() {
+	void handleEdit() {
 	    populatePane(allTasks);
 	}
 	
@@ -93,7 +89,7 @@ public class TaskController implements Initializable {
 		boolean taskRemoved = allTasks.removeIf(task -> task.getUID() == taskID);
 		
 		if(taskRemoved) {
-			TasksFileUtil.deleteTask(taskID);
+		//	TasksFileUtil.deleteTask(taskID);
 			populatePane(allTasks);
 		}
 	}
