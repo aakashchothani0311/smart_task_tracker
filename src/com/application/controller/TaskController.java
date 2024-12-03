@@ -46,6 +46,16 @@ public class TaskController implements Initializable {
 	@FXML
 	private void showCompletedTask() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
+		ArrayList<Task> completedTasks = new ArrayList<>();
+	    for (Task task : allTasks) {
+	        if (task.isCompleted()) {
+	            completedTasks.add(task);
+	            System.out.println("CompletedTasks" + task);
+	        }
+	        
+	    }
+	    populatePane(completedTasks);
+	   
 	}
 	
 	@FXML
@@ -133,4 +143,6 @@ public class TaskController implements Initializable {
 			sp_taskList.setVisible(true);
 		}
 	}
+	
+	
 }
