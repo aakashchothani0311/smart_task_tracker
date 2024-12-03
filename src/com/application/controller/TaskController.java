@@ -5,6 +5,7 @@ import com.application.util.TasksFileUtil;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -50,7 +51,6 @@ public class TaskController implements Initializable {
 	    for (Task task : allTasks) {
 	        if (task.isCompleted()) {
 	            completedTasks.add(task);
-	            System.out.println("CompletedTasks" + task);
 	        }
 	        
 	    }
@@ -61,6 +61,14 @@ public class TaskController implements Initializable {
 	@FXML
 	private void showTasksDueToday() {
 		TaskControllerHelper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
+		ArrayList<Task> tasksDue = new ArrayList<>();
+	    for (Task task : allTasks) {
+	        if (!task.isCompleted() && LocalDate.now().equals(task.getDueDate())) {
+	        	tasksDue.add(task);
+	        }
+	        
+	    }
+	    populatePane(tasksDue);
 	}
 	
 	@FXML
