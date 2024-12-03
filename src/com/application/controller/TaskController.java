@@ -135,9 +135,13 @@ public class TaskController implements Initializable {
 		}
 	}
 	
+	
+	
 	void markComplete(ActionEvent evt) {
-		System.out.println("complete");
-		Button source = (Button) evt.getSource();
+		System.out.println("Complete");
+
+	    // Get the task ID from the button's ID
+	    Button source = (Button) evt.getSource();
 	    int taskId = Integer.parseInt(source.getId());
 
 	    // Find the task in the allTasks list
@@ -147,34 +151,39 @@ public class TaskController implements Initializable {
 	                                   .orElse(null);
 
 	    if (taskToComplete != null) {
-	        
 	    	
-	    	//Confirmation dialog
+	        //Confirmation dialog
 	        Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
 	        confirmationAlert.setTitle("Confirm Completion");
 	        confirmationAlert.setHeaderText("Are you sure you want to complete this task?");
 	        confirmationAlert.setContentText("Once completed, this task cannot be undone.");
 
-	        //Display confirmation dialog
+	        //Display Confirmation Dialog
 	        ButtonType result = confirmationAlert.showAndWait().orElse(ButtonType.CANCEL);
 
-	        // IF YES
 	        if (result == ButtonType.OK) {
-	            taskToComplete.setCompleted(true); 
+	            
+	            taskToComplete.setCompleted(true);  
+
+	           
 	            TasksFileUtil.saveTask(taskToComplete);
 
 	            //Refresh List
 	            if (rb_allTasks.isSelected()) {
 	                populatePane(allTasks);
+	                System.out.println("All Task Refreshed");
 	            } else if (rb_dueTasks.isSelected()) {
 	                showTasksDueToday();
+	                System.out.println("Due Today Task Refreshed.");
 
+	           
+	        } else {
 	            
-	            } else {
 	            System.out.println("Task completion canceled.");
 	        }
-	        }
 	       }
+	    }
+	       
 	}
 	
 	private void populatePane(ArrayList<Task> taskList) {

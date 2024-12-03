@@ -28,6 +28,8 @@ public class TaskControllerHelper {
 		Text dueDate = new Text();
 		dueDate.setText("Due Date: " + task.getDueDate());
 		
+		ButtonBar bb = new ButtonBar();
+		if (!task.isCompleted() && !controller.rb_completedTasks.isSelected()) {
 		Button edit = createTaskAction("EDIT", String.valueOf(task.getUID()), "#0288d1");
 		edit.setOnAction(evt -> controller.editTask(evt));
 		
@@ -39,8 +41,9 @@ public class TaskControllerHelper {
 		
 		
 		
-		ButtonBar bb = new ButtonBar();
+		
 		bb.getButtons().addAll(edit, delete, complete);
+		}
 		 
         GridPane gp = new GridPane();
 		gp.setHgap(10);
