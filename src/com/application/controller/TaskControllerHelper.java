@@ -51,7 +51,7 @@ public class TaskControllerHelper {
 		
 		Button status;
 		if(task.isCompleted())
-			status = createTaskAction("MARK INCOMPLETE", String.valueOf(task.getUID()), "#ffbf00");
+			status = createTaskAction("MARK INCOMPLETE", String.valueOf(task.getUID()), "#ffc107");
 		else
 			status = createTaskAction("MARK COMPLETE", String.valueOf(task.getUID()), "#2e7d32");
 		
