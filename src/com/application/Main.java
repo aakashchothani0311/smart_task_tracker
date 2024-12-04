@@ -20,8 +20,6 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Login.fxml"));
 			stg.setTitle("Login"); 
-			stg.setMinWidth(600);
-		    stg.setMinHeight(400);
 			stg.setScene(new Scene(root));
 			stg.show();
 		} catch (IOException e) {
