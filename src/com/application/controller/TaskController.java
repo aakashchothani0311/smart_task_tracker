@@ -1,22 +1,22 @@
 package com.application.controller;
 
 import com.application.model.Task;
+
 import com.application.util.TasksFileUtil;
+import com.application.util.UtilClass;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
-public class TaskController implements Initializable {
+public class TaskController {
 	
 	@FXML RadioButton rb_allTasks;
 	@FXML RadioButton rb_completedTasks;
@@ -28,10 +28,9 @@ public class TaskController implements Initializable {
 	private TaskControllerHelper helper;
 	private static ArrayList<Task> allTasks;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	public void initialize() {
 		helper = new TaskControllerHelper();
-		
 		
 		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
@@ -86,11 +85,21 @@ public class TaskController implements Initializable {
 		Button source = (Button)evt.getSource();
 		int taskID = Integer.parseInt(source.getId());
 		
-		boolean taskRemoved = allTasks.removeIf(task -> task.getUID() == taskID);
+		int size = allTasks.size();
 		
-		if(taskRemoved) {
-		//	TasksFileUtil.deleteTask(taskID);
-			populatePane(allTasks);
+		for(int i = 0; i < size; i++) {
+			Task temp = allTasks.get(i);
+			
+			if(temp.getUID() == taskID) {
+				if(TasksFileUtil.deleteTask(taskID)) {
+					allTasks.remove(i);
+					populatePane(allTasks);
+		        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Deleted Successfully..", "");
+				} else
+					UtilClass.showAlert(AlertType.ERROR, "Error", "Task not deleted.", "Some error occured while deleting the task.");
+				 
+				break;
+			}
 		}
 	}
 	
@@ -98,7 +107,7 @@ public class TaskController implements Initializable {
 		System.out.println("complete");
 	}
 	
-	public void populatePane(ArrayList<Task> taskList) {
+	private void populatePane(ArrayList<Task> taskList) {
 		g_taskGrid.getChildren().clear();
 		
 		int size = taskList.size();
