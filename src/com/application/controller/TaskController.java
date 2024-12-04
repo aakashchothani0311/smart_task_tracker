@@ -4,19 +4,16 @@ import com.application.model.Task;
 import com.application.util.TasksFileUtil;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 
-public class TaskController implements Initializable {
+public class TaskController {
 	
 	@FXML RadioButton rb_allTasks;
 	@FXML RadioButton rb_completedTasks;
@@ -28,10 +25,9 @@ public class TaskController implements Initializable {
 	private TaskControllerHelper helper;
 	private static ArrayList<Task> allTasks;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	private void initialize() {
 		helper = new TaskControllerHelper();
-		
 		
 		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
@@ -86,10 +82,21 @@ public class TaskController implements Initializable {
 		Button source = (Button)evt.getSource();
 		int taskID = Integer.parseInt(source.getId());
 		
-		boolean taskRemoved = allTasks.removeIf(task -> task.getUID() == taskID);
+		int idx = -1;
+		int size = allTasks.size();
 		
-		if(taskRemoved) {
-		//	TasksFileUtil.deleteTask(taskID);
+		for(int i = 0; i < size; i++) {
+			Task temp = allTasks.get(i);
+			
+			if(temp.getUID() == taskID) {
+				idx = i;
+				TasksFileUtil.deleteTask(temp);
+				break;
+			}
+		}
+		
+		if(idx != -1) {
+			allTasks.remove(idx);
 			populatePane(allTasks);
 		}
 	}

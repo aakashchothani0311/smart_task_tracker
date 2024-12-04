@@ -56,7 +56,12 @@ public class EditTaskController {
 		if(dd == null) {
 			UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due Date field cannot be empty.");
 			return;
-		}		
+		} else {
+        	if(dd.isBefore(task.getCreatedDate())) {
+        		UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due date must be after created date.");
+                return;
+        	}
+        }
 		
 	    task.setTitle(title);
 	    task.setDesc(taskDesc.getText());

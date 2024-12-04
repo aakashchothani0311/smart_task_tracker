@@ -90,9 +90,8 @@ public class TasksFileUtil {
 				int uid = Integer.parseInt(lineSplit[0]);
 				
 				if(uid == taskId) {
-					if(!delete) {
+					if(!delete)
 						writer.write(formatTask(task));
-					} 
 				} else
 					writer.write(line + "\n");
 			}

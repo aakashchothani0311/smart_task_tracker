@@ -53,6 +53,11 @@ public class AddTaskController implements Initializable {
         if (dueTask == null) {
             UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due date must be selected.");
             return;
+        } else {
+        	if(dueTask.isBefore(LocalDate.now())) {
+        		UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due date must be after created date.");
+                return;
+        	}
         }
         
         Task newTask = new Task(20, title, description, dueTask);

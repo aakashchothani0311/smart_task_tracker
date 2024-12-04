@@ -37,8 +37,17 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 	}
 	
 	@Override
-	public List<T> toList(){
-		return heap;
+	public List<T> toSortedList(List<T> sortedList){
+		List<T> tempHeap = new ArrayList<>();
+		
+		ArrayList<T> retList = new ArrayList<>();
+		
+		while(!heap.isEmpty()) {
+			T removedVal = heap.removeFirst();
+			retList.add();
+		}
+		
+		return retList;
 	}
 
 	@Override
