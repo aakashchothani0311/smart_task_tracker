@@ -13,9 +13,9 @@ public class Task implements Comparable <Task> {
 	private LocalDate dueDate;
 	
 	private static HashMap<String, Integer> priorityMap = new HashMap <String, Integer>(){{
-		put("Low", 1);
+		put("Low", 3);
 		put("Medium", 2);
-		put("High", 3);
+		put("High", 1);
 	}};
 	
 	public Task(String title, String desc, String priority, LocalDate dueDate){
