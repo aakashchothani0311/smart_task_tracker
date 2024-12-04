@@ -1,22 +1,24 @@
 package com.application.controller;
 
 import com.application.model.Task;
+
 import com.application.util.TasksFileUtil;
+import com.application.util.UtilClass;
 
 import java.io.IOException;
-import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
-public class TaskController implements Initializable {
+public class TaskController {
 	
 	@FXML RadioButton rb_allTasks;
 	@FXML RadioButton rb_completedTasks;
@@ -28,10 +30,9 @@ public class TaskController implements Initializable {
 	private TaskControllerHelper helper;
 	private static ArrayList<Task> allTasks;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	public void initialize() {
 		helper = new TaskControllerHelper();
-		
 		
 		allTasks = TasksFileUtil.readAllTasks();
 		populatePane(allTasks);
@@ -45,11 +46,25 @@ public class TaskController implements Initializable {
 	
 	@FXML
 	private void showCompletedTask() {
+		ArrayList<Task> completedTasks = new ArrayList<>();
+	    for (Task task : allTasks) {
+	        if (task.isCompleted())
+	            completedTasks.add(task);
+	    }
+	    
+	    populatePane(completedTasks);
 		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
 	}
 	
 	@FXML
 	private void showTasksDueToday() {
+		ArrayList<Task> tasksDue = new ArrayList<>();
+	    for (Task task : allTasks) {
+	        if (!task.isCompleted() && LocalDate.now().equals(task.getDueDate()))
+	        	tasksDue.add(task);      
+	    }
+	    
+	    populatePane(tasksDue);
 		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
@@ -86,19 +101,60 @@ public class TaskController implements Initializable {
 		Button source = (Button)evt.getSource();
 		int taskID = Integer.parseInt(source.getId());
 		
-		boolean taskRemoved = allTasks.removeIf(task -> task.getUID() == taskID);
+		int size = allTasks.size();
 		
-		if(taskRemoved) {
-		//	TasksFileUtil.deleteTask(taskID);
-			populatePane(allTasks);
+		for(int i = 0; i < size; i++) {
+			Task temp = allTasks.get(i);
+			
+			if(temp.getUID() == taskID) {
+				if(TasksFileUtil.deleteTask(taskID)) {
+					allTasks.remove(i);
+					populatePane(allTasks);
+		        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Deleted Successfully.", "");
+				} else
+					UtilClass.showAlert(AlertType.ERROR, "Error", "Task not deleted.", "Some error occured while deleting the task.");
+				 
+				break;
+			}
 		}
 	}
 	
 	void markComplete(ActionEvent evt) {
-		System.out.println("complete");
+	    Button source = (Button) evt.getSource();
+	    int taskId = Integer.parseInt(source.getId());
+	    
+	    Task taskToUpdate = allTasks.stream()
+	                                   .filter(t -> t.getUID() == taskId)
+	                                   .findFirst()
+	                                   .orElse(null);
+	    
+	    boolean currentState = taskToUpdate.isCompleted();
+
+	    taskToUpdate.setCompleted(!currentState);  
+   
+		if(TasksFileUtil.updateTaskInFile(taskToUpdate)) {
+
+		    if (rb_allTasks.isSelected())
+		        populatePane(allTasks);
+		    else if (rb_completedTasks.isSelected())
+		    	showCompletedTask();
+		    else
+		        showTasksDueToday();
+		    
+		    if(currentState) {
+		    	source.setText("MARK COMPLETE");
+		    	source.setStyle("-fx-background-color: #2e7d32");
+		    	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task marked as incomplete.", "");
+		    } else {
+		    	source.setText("MARK INCOMPLETE");
+		    	source.setStyle("-fx-background-color: #ffbf00");
+		    	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task completed successfully.", "");
+		    }   	
+		}
 	}
+	       
 	
-	public void populatePane(ArrayList<Task> taskList) {
+	private void populatePane(ArrayList<Task> taskList) {
 		g_taskGrid.getChildren().clear();
 		
 		int size = taskList.size();
