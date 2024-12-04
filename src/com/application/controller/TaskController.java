@@ -1,11 +1,9 @@
 package com.application.controller;
 
 import com.application.model.Task;
-
+import com.application.util.CustomHeap;
 import com.application.util.TasksFileUtil;
 import com.application.util.UtilClass;
-
-import java.io.IOException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +21,7 @@ public class TaskController {
 	@FXML RadioButton rb_allTasks;
 	@FXML RadioButton rb_completedTasks;
 	@FXML RadioButton rb_dueTasks;
+	@FXML RadioButton rb_priorityView;
 	@FXML Button b_createTask;
 	@FXML GridPane g_taskGrid;
 	@FXML ScrollPane sp_taskList;
@@ -40,8 +39,8 @@ public class TaskController {
 
 	@FXML
 	private void showAllList() {
-		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "all");
 		populatePane(allTasks);
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, rb_priorityView, "all");
 	}
 	
 	@FXML
@@ -53,7 +52,7 @@ public class TaskController {
 	    }
 	    
 	    populatePane(completedTasks);
-		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, rb_priorityView, "completed");
 	}
 	
 	@FXML
@@ -65,18 +64,33 @@ public class TaskController {
 	    }
 	    
 	    populatePane(tasksDue);
-		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, rb_priorityView, "due");
 	}
 	
 	@FXML
-	private void handleCreateTask(ActionEvent event) throws IOException {
+	private void showPriorityView() {
+		CustomHeap<Task> heap = new CustomHeap<>();
+		
+		for (Task task : allTasks) {
+			if(!task.isCompleted())
+				heap.insert(task);
+		}
+	    
+		ArrayList<Task> priorityList = (ArrayList<Task>) heap.toSortedList();
+		populatePane(priorityList);
+		
+		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, rb_priorityView, "priority");
+	}
+	
+	@FXML
+	private void handleCreateTask(ActionEvent event) {
 		helper.showDialog("AddTask.fxml", "Add New Task");
 	    AddTaskController.setTaskController(this);
 	}
 	
 	void handleAdd(Task task) {
 		allTasks.add(task);
-        populatePane(allTasks);
+        viewToShow();
 	}
 	
 	void editTask(ActionEvent evt) {
@@ -94,7 +108,7 @@ public class TaskController {
 	}
 	
 	void handleEdit() {
-	    populatePane(allTasks);
+		viewToShow();
 	}
 	
 	void deleteTask(ActionEvent evt) {
@@ -109,7 +123,7 @@ public class TaskController {
 			if(temp.getUID() == taskID) {
 				if(TasksFileUtil.deleteTask(taskID)) {
 					allTasks.remove(i);
-					populatePane(allTasks);
+					viewToShow();
 		        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Deleted Successfully.", "");
 				} else
 					UtilClass.showAlert(AlertType.ERROR, "Error", "Task not deleted.", "Some error occured while deleting the task.");
@@ -133,14 +147,8 @@ public class TaskController {
 	    taskToUpdate.setCompleted(!currentState);  
    
 		if(TasksFileUtil.updateTaskInFile(taskToUpdate)) {
-
-		    if (rb_allTasks.isSelected())
-		        populatePane(allTasks);
-		    else if (rb_completedTasks.isSelected())
-		    	showCompletedTask();
-		    else
-		        showTasksDueToday();
-		    
+			viewToShow();
+			
 		    if(currentState) {
 		    	source.setText("MARK COMPLETE");
 		    	source.setStyle("-fx-background-color: #2e7d32");
@@ -152,8 +160,18 @@ public class TaskController {
 		    }   	
 		}
 	}
-	       
 	
+	private void viewToShow() {
+		if (rb_allTasks.isSelected())
+	        populatePane(allTasks);
+	    else if (rb_completedTasks.isSelected())
+	    	showCompletedTask();
+	    else if(rb_dueTasks.isSelected())
+	        showTasksDueToday();
+	    else
+	    	showPriorityView();
+	}
+	       
 	private void populatePane(ArrayList<Task> taskList) {
 		g_taskGrid.getChildren().clear();
 		

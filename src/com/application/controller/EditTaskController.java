@@ -78,8 +78,11 @@ public class EditTaskController {
 	    task.setPriority(priority);
 	    task.setDueDate(dd);
 	        
-	    TasksFileUtil.updateTaskInFile(task);
-	    taskController.handleEdit();
+	    if(TasksFileUtil.updateTaskInFile(task)) {
+	    	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Updated Successfully.", "");
+	    	taskController.handleEdit();
+	    } else
+	    	UtilClass.showAlert(AlertType.ERROR, "Error", "Task not updated.", "Some error occured while updating the task.");;
 
 	    Stage stage = (Stage) taskTitle.getScene().getWindow();
 	    stage.close();
