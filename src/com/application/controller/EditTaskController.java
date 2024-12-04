@@ -66,7 +66,7 @@ public class EditTaskController {
 		if(dd == null) {
 			UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due Date field cannot be empty.");
 			return;
-		}else {
+		} else {
         	if(dd.isBefore(task.getCreatedDate())) {
         		UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due date must be after created date.");
                 return;
@@ -78,11 +78,13 @@ public class EditTaskController {
 	    task.setPriority(priority);
 	    task.setDueDate(dd);
 	        
-	    TasksFileUtil.updateTaskInFile(task);
-	    taskController.handleEdit();
+	    if(TasksFileUtil.updateTaskInFile(task)) {
+	    	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Updated Successfully.", "");
+	    	taskController.handleEdit();
+	    } else
+	    	UtilClass.showAlert(AlertType.ERROR, "Error", "Task not updated.", "Some error occured while updating the task.");;
 
 	    Stage stage = (Stage) taskTitle.getScene().getWindow();
 	    stage.close();
 	}
-	
 }

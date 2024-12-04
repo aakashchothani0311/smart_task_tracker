@@ -118,9 +118,10 @@ public class TaskControllerHelper {
 		}
 	}
 	
-	void toggleRadio(RadioButton rb_allTasks, RadioButton rb_completedTasks, RadioButton rb_dueTasks, String option) {
-		rb_allTasks.setSelected(!option.equals("completed") && !option.equals("due"));
-		rb_completedTasks.setSelected(!option.equals("all") && !option.equals("due"));
-		rb_dueTasks.setSelected(!option.equals("all") && !option.equals("completed"));
+	void toggleRadio(RadioButton rb_allTasks, RadioButton rb_completedTasks, RadioButton rb_dueTasks, RadioButton rb_priorityView, String option) {
+		rb_allTasks.setSelected(!option.equals("completed") && !option.equals("due") && !option.equals("priority"));
+		rb_completedTasks.setSelected(!option.equals("all") && !option.equals("due") && !option.equals("priority"));
+		rb_dueTasks.setSelected(!option.equals("all") && !option.equals("completed") && !option.equals("priority"));
+		rb_priorityView.setSelected(!option.equals("all") && !option.equals("completed") && !option.equals("due"));
 	}
 }

@@ -47,6 +47,7 @@
                                     <RadioButton fx:id="rb_allTasks" mnemonicParsing="false" onAction="#showAllList" selected="true" text="All Tasks" />
                                     <RadioButton fx:id="rb_completedTasks" mnemonicParsing="false" onAction="#showCompletedTask" text="Completed Tasks" />
                                     <RadioButton fx:id="rb_dueTasks" layoutX="112.0" layoutY="19.0" mnemonicParsing="false" onAction="#showTasksDueToday" text="Tasks Due Today" />
+                                    <RadioButton fx:id="rb_priorityView" mnemonicParsing="false" onAction="#showPriorityView" text="My Priority View" />
                                  </children>
                               </HBox>
                               <Button fx:id="b_createTask" layoutX="913.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleCreateTask" style="-fx-background-color: #0056b3;" text="+ Create Task" textFill="WHITE" />
