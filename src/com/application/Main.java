@@ -18,7 +18,7 @@ public class Main extends Application {
 		stg = primaryStage;
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Main.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Login.fxml"));
 			stg.setTitle("Login"); 
 			stg.setMinWidth(600);
 		    stg.setMinHeight(400);
