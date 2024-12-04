@@ -2,105 +2,117 @@ package com.application.util;
 
 import com.application.model.Task;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class TasksFileUtil {
 	
-	private static String filePath = "data/tasks";
+	private static Path readFilePath = Paths.get("data/tasks");
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 	
 	public static ArrayList<Task> readAllTasks() {
 	    ArrayList<Task> allTasks = new ArrayList<>();
 
-	    try (Scanner fin = new Scanner(new File(filePath))) {
-	        while (fin.hasNextLine()) {
-	            String line = fin.nextLine().strip();
-	           /* if (line.isEmpty()) {
-	                continue;
-	            }
-
-	            String[] lineSplit = formatString(line).split("\\|\\|");
-	            if (lineSplit.length < 6) {
-	                System.err.println("Invalid line format: " + line);
-	                continue;
-	            }*/
-
-	            String[] lineSplit = formatString(line).split("\\|\\|");
+	    try {
+	    	List<String> allLines = Files.readAllLines(readFilePath);
+	    	
+	    	int taskSize = allLines.size();
+	    	
+    		for(int i = 1; i < taskSize; i++) {
+    			String line = allLines.get(i);
+    			String[] lineSplit = formatString(line).split("\\|\\|");
 	            
-	            try {
-	                int uid = Integer.parseInt(formatString(lineSplit[0]));
-	                String title = formatString(lineSplit[1]);
-	                String desc = formatString(lineSplit[2]);
-	                boolean isCompleted = formatString(lineSplit[3]).equals("true");
-	                LocalDate createdDate = LocalDate.parse(formatString(lineSplit[4]), formatter);
-	                LocalDate dueDate = LocalDate.parse(formatString(lineSplit[5]), formatter);
+                int uid = Integer.parseInt(formatString(lineSplit[0]));
+                String title = formatString(lineSplit[1]);
+                String desc = formatString(lineSplit[2]);
+                boolean isCompleted = formatString(lineSplit[3]).equals("true");
+                String priority = formatString(lineSplit[4]);
+                LocalDate createdDate = LocalDate.parse(formatString(lineSplit[5]), formatter);
+                LocalDate dueDate = LocalDate.parse(formatString(lineSplit[6]), formatter);
 
-	                allTasks.add(new Task(uid, title, desc, isCompleted, createdDate, dueDate));
-	            } catch (NumberFormatException | DateTimeParseException e) {
-	                System.err.println("Error parsing line: " + line + " - " + e.getMessage());
-	            }
-	        }
-	    } catch (FileNotFoundException e) {
-	        System.err.println("File tasks not found: ");
+                allTasks.add(new Task(uid, title, desc, isCompleted, priority, createdDate, dueDate));
+    		}
+	    	
+	    	return allTasks;
+	    } catch (IOException ex) {
+	    	ex.printStackTrace();
+	    	return allTasks;
 	    }
-
-	    return allTasks;
 	}
 	
-    public static void appendTaskToFile(Task task) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String taskLine = formatTask(task);
-            writer.write(taskLine);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static boolean appendTaskToFile(Task task) {
+    	try {
+    		List<String> allLines = Files.readAllLines(readFilePath);
+    		
+    		String[] idxArr = allLines.get(0).split(":");
+        	
+        	int currId = Integer.parseInt(idxArr[1]);
+        	idxArr[1] = String.valueOf(currId + 1);
+        	
+        	allLines.set(0, idxArr[0] + ":" + idxArr[1]);
+        	
+        	task.setUID(currId);
+        	allLines.add(formatTask(task));
+        	
+        	Files.write(readFilePath, allLines);
+    		
+    		return true;
+    	} catch (IOException ex) {
+    		ex.printStackTrace();
+    		return false;
+    	}
     }
 
-    public static void updateTaskInFile(Task updatedTask) {
-        updatefile(updatedTask, false);
+    public static boolean updateTaskInFile(Task updatedTask) {
+        try {
+    		List<String> allLines = Files.readAllLines(readFilePath);
+    		int size = allLines.size();
+    		
+    		for(int i = 1; i < size; i++) {
+    			String line = allLines.get(i);
+    			int id = Integer.parseInt(formatString(line).split("\\|\\|")[0]);
+    			
+    			if(id == updatedTask.getUID()) {
+    				allLines.set(i, formatTask(updatedTask));
+    				break;
+    			}
+    		}
+    		
+    		Files.write(readFilePath, allLines);
+    		return true;
+        } catch (IOException ex) {
+    		ex.printStackTrace();
+    		return false;
+    	}
     }
 	
-	public static void deleteTask(Task task) {
-		updatefile(task, true);
-	}
-	
-	private static void updatefile(Task task, boolean delete) {
-		File originalFile = new File(filePath);
-		File tempFile = new File(filePath + ".tmp");
+	public static boolean deleteTask(int taskID) {
+        try {
+    		List<String> allLines = Files.readAllLines(readFilePath);
+    		int size = allLines.size();
+    		
+    		for(int i = 1; i < size; i++) {
+    			String line = allLines.get(i);
+    			int id = Integer.parseInt(formatString(line).split("\\|\\|")[0]);
+    			
+    			if(id == taskID) {
+    				allLines.remove(i);
+    				break;
+    			}
+    		}
 		
-		int taskId = task.getUID();
-		
-		try (
-			Scanner fin = new Scanner(originalFile);
-			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-			
-			while(fin.hasNextLine()) {
-				String line = fin.nextLine();
-				String[] lineSplit = line.split("\\|\\|");
-				
-				int uid = Integer.parseInt(lineSplit[0]);
-				
-				if(uid == taskId) {
-					if(!delete)
-						writer.write(formatTask(task));
-				} else
-					writer.write(line + "\n");
-			}
-			
-			originalFile.delete();
-			tempFile.renameTo(originalFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    		Files.write(readFilePath, allLines);
+			return true;
+    	} catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+    	}
 	}
 	
     private static String formatTask(Task task) {
@@ -108,8 +120,9 @@ public class TasksFileUtil {
         	   task.getTitle() + "||" +
                task.getDesc() + "||" +
                task.isCompleted() + "||" +
+               task.getPriority() + "||" +
                task.getCreatedDate().format(formatter) + "||" +
-               task.getDueDate().format(formatter) + "\n";
+               task.getDueDate().format(formatter);
     }
 	
 	private static String formatString(String s) {

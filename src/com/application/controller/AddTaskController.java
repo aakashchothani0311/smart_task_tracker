@@ -1,33 +1,35 @@
 package com.application.controller;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import com.application.model.Task;
 import com.application.util.TasksFileUtil;
 import com.application.util.UtilClass;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AddTaskController implements Initializable {
+public class AddTaskController {
 	@FXML TextField taskTitle;
 	@FXML TextArea taskDesc;
+	@FXML ComboBox<String> taskPriority;
 	@FXML Text createdDate;
 	@FXML DatePicker dueDate;
 	
 	private static TaskController taskController;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+    @FXML
+	private void initialize() {
 		createdDate.setText(LocalDate.now().toString());
+		taskPriority.setItems(FXCollections.observableArrayList("Low", "Medium", "High"));
+		taskPriority.setValue("Low");
 	}
 	
 	public static void setTaskController(TaskController controller) {
@@ -38,6 +40,7 @@ public class AddTaskController implements Initializable {
 	private void handleAddTask() {
         String title = taskTitle.getText();
         String description = taskDesc.getText();
+        String priority = (String) taskPriority.getValue();
         LocalDate dueTask = dueDate.getValue();
         
         if (title == null || title.trim().isEmpty()) {
@@ -49,7 +52,7 @@ public class AddTaskController implements Initializable {
             UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Task description cannot be empty.");
             return;
         }
-
+        
         if (dueTask == null) {
             UtilClass.showAlert(AlertType.ERROR, "Error", "Invalid Input", "Due date must be selected.");
             return;
@@ -60,9 +63,14 @@ public class AddTaskController implements Initializable {
         	}
         }
         
-        Task newTask = new Task(20, title, description, dueTask);
-        TasksFileUtil.appendTaskToFile(newTask);
-        taskController.handleAdd(newTask);
+        Task newTask = new Task(title, description, priority, dueTask);
+        boolean taskAdded = TasksFileUtil.appendTaskToFile(newTask);
+        
+        if(taskAdded) {
+        	taskController.handleAdd(newTask);
+        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Added Successfully.", "");
+        } else
+        	UtilClass.showAlert(AlertType.ERROR, "Error", "Task not created.", "Some error occured while creating the new task.");
         
         Stage stage = (Stage) taskTitle.getScene().getWindow();
         stage.close();

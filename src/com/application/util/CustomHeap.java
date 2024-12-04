@@ -21,9 +21,6 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 		int currIdx = heap.size() - 1; 
 		int parentIdx = (currIdx - 1) / 2;
 		
-		System.out.println(currIdx + " " + parentIdx);
-
-		System.out.println("Compare: " + heap.get(currIdx).compareTo(heap.get(parentIdx)));
         while (currIdx > 0 && heap.get(currIdx).compareTo(heap.get(parentIdx)) < 0) {
             swap(currIdx, parentIdx); 
             currIdx = parentIdx;
@@ -33,7 +30,35 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 
 	@Override
 	public T remove() {
-		return null;
+        T min = heap.get(0); 
+
+        T lastElement = heap.remove(heap.size() - 1); 
+
+        if (!heap.isEmpty()) {
+            heap.set(0, lastElement); 
+
+            int currentIndex = 0;
+            while (true) {
+                int left = 2 * currentIndex + 1;
+                int right = 2 * currentIndex + 2;
+
+                int smallest = currentIndex;
+
+                if (left < heap.size() && heap.get(left).compareTo(heap.get(smallest)) < 0)
+                    smallest = left;
+                
+                if (right < heap.size() && heap.get(right).compareTo(heap.get(smallest)) < 0)
+                    smallest = right;
+                
+                if (smallest == currentIndex)
+                    break; 
+
+                swap(currentIndex, smallest); 
+                currentIndex = smallest; 
+            }
+        }
+
+        return min;
 	}
 	
 	@Override
@@ -42,10 +67,10 @@ public class CustomHeap<T extends Comparable<T>> implements CustomHeapInterface<
 		
 		ArrayList<T> retList = new ArrayList<>();
 		
-		while(!heap.isEmpty()) {
+		/*while(!heap.isEmpty()) {
 			T removedVal = heap.removeFirst();
 			retList.add();
-		}
+		}*/
 		
 		return retList;
 	}

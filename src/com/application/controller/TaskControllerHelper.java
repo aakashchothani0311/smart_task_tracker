@@ -13,7 +13,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class TaskControllerHelper {
@@ -29,11 +31,17 @@ public class TaskControllerHelper {
 		desc.setText(task.getDesc());
 		desc.setWrappingWidth(800.0);
 		
-		Text createdDate = new Text();
-		createdDate.setText("Created Date: " + task.getCreatedDate());
+		Text priorityLabel = new Text("Priority:  ");
+		priorityLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+		TextFlow priority = new TextFlow(priorityLabel, new Text(task.getPriority()));
 		
-		Text dueDate = new Text();
-		dueDate.setText("Due Date: " + task.getDueDate());
+		Text createdDateLabel = new Text("Created Date:  ");
+		createdDateLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+		TextFlow createdDate = new TextFlow(createdDateLabel, new Text("" + task.getCreatedDate()));
+		
+		Text dueDateLabel = new Text("Due Date:  ");
+		dueDateLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+		TextFlow dueDate = new TextFlow(dueDateLabel, new Text("" + task.getDueDate()));
 		
 		Button edit = createTaskAction("EDIT", String.valueOf(task.getUID()), "#0288d1");
 		edit.setOnAction(evt -> controller.editTask(evt));
@@ -41,11 +49,20 @@ public class TaskControllerHelper {
 		Button delete = createTaskAction("DELETE", String.valueOf(task.getUID()), "#d32f2f");
 		delete.setOnAction(evt -> controller.deleteTask(evt));
 		
-		Button complete = createTaskAction("MARK COMPLETE", String.valueOf(task.getUID()), "#2e7d32");
-		complete.setOnAction(evt -> controller.markComplete(evt));
+		Button status;
+		if(task.isCompleted())
+			status = createTaskAction("MARK INCOMPLETE", String.valueOf(task.getUID()), "#ffbf00");
+		else
+			status = createTaskAction("MARK COMPLETE", String.valueOf(task.getUID()), "#2e7d32");
+		
+		status.setOnAction(evt -> controller.markComplete(evt));
 		
 		ButtonBar bb = new ButtonBar();
-		bb.getButtons().addAll(edit, delete, complete);
+		
+		if(!task.isCompleted())
+			bb.getButtons().add(edit);
+		
+		bb.getButtons().addAll(delete, status);
 		 
         GridPane gp = new GridPane();
 		gp.setHgap(10);
@@ -54,16 +71,23 @@ public class TaskControllerHelper {
 		
 		if(task.isCompleted())
 			gp.setStyle("-fx-border-color: #3edd1e; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: #f4fff2");
-		else
-			gp.setStyle("-fx-border-color: #d1d1d1; -fx-border-width: 2; -fx-border-radius: 10");
+		else {
+			if(task.getPriority().equals("High"))
+				gp.setStyle("-fx-border-color: #d32f2f; -fx-border-width: 2; -fx-border-radius: 10");
+			else if(task.getPriority().equals("Medium"))
+				gp.setStyle("-fx-border-color: #ffbf00; -fx-border-width: 2; -fx-border-radius: 10");
+			else
+				gp.setStyle("-fx-border-color: #d1d1d1; -fx-border-width: 2; -fx-border-radius: 10");
+		}
 		
 		gp.add(title, 0, 0);
 		gp.add(desc, 0, 1);
-		gp.setColumnSpan(desc, 2);
-		gp.add(createdDate, 0, 2);
-		gp.add(dueDate, 1, 2);
+		GridPane.setColumnSpan(desc, 3);
+		gp.add(priority, 0, 2);
+		gp.add(createdDate, 1, 2);
+		gp.add(dueDate, 2, 2);
 		gp.add(bb, 0, 3);
-		gp.setColumnSpan(bb, 2);
+		GridPane.setColumnSpan(bb, 3);
 		
 		return gp;	
 	}
