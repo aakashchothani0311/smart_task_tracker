@@ -2,8 +2,6 @@ package com.application;
 
 import java.io.IOException;
 
-import com.application.util.CustomHeap;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -20,8 +18,10 @@ public class Main extends Application {
 		stg = primaryStage;
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Main.fxml"));
 			stg.setTitle("Login"); 
+			stg.setMinWidth(600);
+		    stg.setMinHeight(400);
 			stg.setScene(new Scene(root));
 			stg.show();
 		} catch (IOException e) {
@@ -43,15 +43,6 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
-	//	launch(args);
-		
-		CustomHeap<Integer> heap = new CustomHeap<Integer>();
-		int[] temp = new int[] {5, 7, 8, 1, 2,5, 10, -2};
-		
-		for(int t : temp)
-			heap.insert(t);
-		
-		while(!heap.isEmpty())
-			System.out.println(heap.remove());
+		launch(args);
 	}
 }
