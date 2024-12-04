@@ -1,24 +1,22 @@
 package com.application.controller;
 
 import com.application.model.Task;
+
 import com.application.util.TasksFileUtil;
 import com.application.util.UtilClass;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
-public class TaskController implements Initializable {
+public class TaskController {
 	
 	@FXML RadioButton rb_allTasks;
 	@FXML RadioButton rb_completedTasks;
@@ -30,8 +28,8 @@ public class TaskController implements Initializable {
 	private TaskControllerHelper helper;
 	private static ArrayList<Task> allTasks;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	@FXML
+	public void initialize() {
 		helper = new TaskControllerHelper();
 		
 		allTasks = TasksFileUtil.readAllTasks();

@@ -16,11 +16,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="383.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.application.controller.AddTaskController">
    <children>
-      <!-- <ImageView fitHeight="383.0" fitWidth="360.0" opacity="0.4" pickOnBounds="true">
-         <image>
-            <Image url="@../../img/add.jpeg" />
-         </image>
-      </ImageView> -->
       <Text fill="#0041b2" layoutX="113.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD TASK" textAlignment="CENTER">
          <font>
             <Font name="Adelle Sans Devanagari Extrabold" size="24.0" />
