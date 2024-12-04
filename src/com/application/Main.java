@@ -3,7 +3,6 @@ package com.application;
 import java.io.IOException;
 
 import com.application.util.CustomHeap;
-import com.application.util.TasksFileUtil;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,7 @@ public class Main extends Application {
 		stg = primaryStage;
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Main.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(viewPath + "Login.fxml"));
 			stg.setTitle("Login"); 
 			stg.setScene(new Scene(root));
 			stg.show();

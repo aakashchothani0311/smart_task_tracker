@@ -68,7 +68,7 @@ public class AddTaskController {
         
         if(taskAdded) {
         	taskController.handleAdd(newTask);
-        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Added Successfully..", "");
+        	UtilClass.showAlert(AlertType.INFORMATION, "Success", "Task Added Successfully.", "");
         } else
         	UtilClass.showAlert(AlertType.ERROR, "Error", "Task not created.", "Some error occured while creating the new task.");
         
