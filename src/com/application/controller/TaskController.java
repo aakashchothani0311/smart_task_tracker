@@ -10,7 +10,13 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
@@ -44,11 +50,29 @@ public class TaskController {
 	
 	@FXML
 	private void showCompletedTask() {
+		ArrayList<Task> completedTasks = new ArrayList<>();
+    
+	    for (Task task : allTasks) {
+	        if (task.isCompleted()) {
+	            completedTasks.add(task);
+	        }
+	        
+	    }
+	    populatePane(completedTasks);
 		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "completed");
 	}
 	
 	@FXML
 	private void showTasksDueToday() {
+		ArrayList<Task> tasksDue = new ArrayList<>();
+	    for (Task task : allTasks) {
+	        if (!task.isCompleted() && LocalDate.now().equals(task.getDueDate())) {
+	        	tasksDue.add(task);
+	        }
+	        
+	    }
+	    populatePane(tasksDue);
+    
 		helper.toggleRadio(rb_allTasks, rb_completedTasks, rb_dueTasks, "due");
 	}
 	
@@ -103,8 +127,54 @@ public class TaskController {
 		}
 	}
 	
+	
 	void markComplete(ActionEvent evt) {
-		System.out.println("complete");
+		System.out.println("Complete");
+
+	    // Get the task ID from the button's ID
+	    Button source = (Button) evt.getSource();
+	    int taskId = Integer.parseInt(source.getId());
+
+	    // Find the task in the allTasks list
+	    Task taskToComplete = allTasks.stream()
+	                                   .filter(t -> t.getUID() == taskId)
+	                                   .findFirst()
+	                                   .orElse(null);
+
+	    if (taskToComplete != null) {
+	    	
+	        //Confirmation dialog
+	        Alert confirmationAlert = new Alert(AlertType.CONFIRMATION);
+	        confirmationAlert.setTitle("Confirm Completion");
+	        confirmationAlert.setHeaderText("Are you sure you want to complete this task?");
+	        confirmationAlert.setContentText("Once completed, this task cannot be undone.");
+
+	        //Display Confirmation Dialog
+	        ButtonType result = confirmationAlert.showAndWait().orElse(ButtonType.CANCEL);
+
+	        if (result == ButtonType.OK) {
+	            
+	            taskToComplete.setCompleted(true);  
+
+	           
+	            TasksFileUtil.saveTask(taskToComplete);
+
+	            //Refresh List
+	            if (rb_allTasks.isSelected()) {
+	                populatePane(allTasks);
+	                System.out.println("All Task Refreshed");
+	            } else if (rb_dueTasks.isSelected()) {
+	                showTasksDueToday();
+	                System.out.println("Due Today Task Refreshed.");
+
+	           
+	        } else {
+	            
+	            System.out.println("Task completion canceled.");
+	        }
+	       }
+	    }
+	       
 	}
 	
 	private void populatePane(ArrayList<Task> taskList) {
@@ -122,4 +192,8 @@ public class TaskController {
 			sp_taskList.setVisible(true);
 		}
 	}
+	
+	
+	
+	
 }
