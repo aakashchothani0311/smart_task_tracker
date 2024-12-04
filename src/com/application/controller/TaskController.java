@@ -6,12 +6,12 @@ import com.application.util.TasksFileUtil;
 import com.application.util.UtilClass;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -31,7 +31,7 @@ public class TaskController {
 	private static ArrayList<Task> allTasks;
 	
 	@FXML
-	public void initialize() {
+	private void initialize() {
 		helper = new TaskControllerHelper();
 		
 		allTasks = TasksFileUtil.readAllTasks();
@@ -100,7 +100,7 @@ public class TaskController {
 	void deleteTask(ActionEvent evt) {
 		Button source = (Button)evt.getSource();
 		int taskID = Integer.parseInt(source.getId());
-		
+
 		int size = allTasks.size();
 		
 		for(int i = 0; i < size; i++) {

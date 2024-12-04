@@ -1,8 +1,9 @@
 package com.application.model;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
-public class Task {
+public class Task implements Comparable <Task> {
 	private int uid;
 	private String title;
 	private String desc;
@@ -10,6 +11,12 @@ public class Task {
 	private String priority;
 	private LocalDate createdDate;
 	private LocalDate dueDate;
+	
+	private static HashMap<String, Integer> priorityMap = new HashMap <String, Integer>(){{
+		put("Low", 1);
+		put("Medium", 2);
+		put("High", 3);
+	}};
 	
 	public Task(String title, String desc, String priority, LocalDate dueDate){
 		this(0, title, desc, false, priority, LocalDate.now(), dueDate);
@@ -80,4 +87,14 @@ public class Task {
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
+	
+	@Override
+    public int compareTo(Task task) {
+        if (this.dueDate.isEqual(task.getDueDate()))
+            return Integer.compare(priorityMap.get(this.priority), priorityMap.get(task.getPriority()));
+        else if (this.dueDate.isAfter(task.getDueDate()))
+            return 1;
+        else
+            return -1;
+    }
 }

@@ -1,4 +1,4 @@
-CurrIdx:22
+CurrIdx:11
 1||PSA Assignment 1||The goal of this assignment is to implement basic recursion problems such as factorial, Fibonacci sequence, and tower of Hanoi. Write functions for each problem and test with various inputs. Focus on time complexity analysis for each problem.||false||Low||12/01/2024||12/20/2024
 2||PSA Assignment 2||Implement sorting algorithms such as Merge Sort, Quick Sort, and Heap Sort. Compare their performance with increasing input sizes. Include graphs to show time complexity trends.||true||Medium||12/01/2024||12/30/2024
 3||PSA Assignment 3||Learn dynamic programming concepts by solving problems like Knapsack, Longest Common Subsequence, and Matrix Chain Multiplication. Explain the memoization and tabulation techniques used.||false||Low||12/03/2024||01/10/2025

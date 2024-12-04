@@ -107,7 +107,7 @@ public class TasksFileUtil {
     			}
     		}
 		
-			Files.write(readFilePath, allLines);
+    		Files.write(readFilePath, allLines);
 			return true;
     	} catch (IOException ex) {
 			ex.printStackTrace();
