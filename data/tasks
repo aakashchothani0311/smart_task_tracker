@@ -1,11 +1,16 @@
-CurrIdx:11
-1||PSA Assignment 1||The goal of this assignment is to implement basic recursion problems such as factorial, Fibonacci sequence, and tower of Hanoi. Write functions for each problem and test with various inputs. Focus on time complexity analysis for each problem.||false||Medium||12/01/2024||12/02/2024
+CurrIdx:16
+1||PSA Assignment 1||The goal of this assignment is to implement basic recursion problems such as factorial, Fibonacci sequence, and tower of Hanoi. Write functions for each problem and test with various inputs. Focus on time complexity analysis for each problem.||true||Medium||12/01/2024||12/02/2024
 2||PSA Assignment 2||Implement sorting algorithms such as Merge Sort, Quick Sort, and Heap Sort. Compare their performance with increasing input sizes. Include graphs to show time complexity trends.||true||Medium||12/01/2024||12/30/2024
 3||PSA Assignment 3||Learn dynamic programming concepts by solving problems like Knapsack, Longest Common Subsequence, and Matrix Chain Multiplication. Explain the memoization and tabulation techniques used.||false||Low||12/03/2024||01/10/2025
 4||PSA Assignment 4||Work on graph algorithms including Dijkstra's shortest path, Prim's minimum spanning tree, and BFS/DFS traversal. Create visualizations for the graph traversal results.||false||High||12/03/2024||01/20/2025
 5||PSA Assignment 5||Understand and implement tree data structures such as Binary Search Trees, AVL Trees, and Red-Black Trees. Write code to insert, delete, and search elements. Include a detailed analysis of balancing mechanisms.||false||Low||12/05/2024||01/15/2025
 6||PSA Assignment 6||Explore Hashing and Hash Tables. Implement a custom hash map and demonstrate collision resolution techniques such as chaining and open addressing. Test with various key-value pairs.||false||High||12/08/2024||01/25/2025
 7||PSA Assignment 7||Learn backtracking by solving problems like N-Queens, Sudoku Solver, and Subset Sum. Provide detailed explanations for recursive call flows.||false||Medium||12/10/2024||01/30/2025
-8||PSA Assignment 8||Practice advanced data structures such as Segment Trees and Fenwick Trees by solving range query problems. Compare their performance with naive methods.||false||Medium||11/29/2024||12/01/2024
+8||PSA Assignment 8||Practice advanced data structures such as Segment Trees and Fenwick Trees by solving range query problems. Compare their performance with naive methods.||true||Medium||11/29/2024||12/01/2024
 9||PSA Assignment 9||Implement string matching algorithms like KMP, Rabin-Karp, and Boyer-Moore. Compare their efficiency and explain use cases for each.||true||Low||12/20/2024||02/15/2025
 10||PSA Assignment 10||Study computational geometry by solving problems like Convex Hull, Line Intersection, and Closest Pair of Points. Write code and visualize the results.||false||High||12/25/2024||02/25/2025
+11||PSA Assignment 11||Complete the implementation of Trie data structure and demonstrate insert, search, and delete operations with test cases.||false||High||11/25/2024||12/04/2024
+12||PSA Assignment 12||Analyze the performance of Union-Find (Disjoint Set) data structure and solve problems like Kruskal's MST.||false||Medium||11/28/2024||12/04/2024
+13||PSA Assignment 13||Design and implement a caching mechanism using Least Recently Used (LRU) and First In First Out (FIFO) algorithms.||false||Low||11/30/2024||12/04/2024
+14||PSA Assignment 14||Complete the exercises on Divide and Conquer algorithms, including Closest Pair of Points and Maximum Subarray problems.||false||Medium||12/01/2024||12/04/2024
+15||PSA Assignment 15||Implement Graph Coloring using Greedy Algorithm and Backtracking methods, and compare their results for small graphs.||false||High||12/03/2024||12/04/2024
