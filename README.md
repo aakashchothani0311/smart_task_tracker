@@ -1,5 +1,10 @@
-## debug_ninjas
+## SMART Task Tracker
 
+<img width="1204" alt="PriorityView" src="https://github.com/user-attachments/assets/905a4dec-39ad-4a6a-9a1c-9015d2f519a6" />
+
+<img width="1196" alt="AddTask" src="https://github.com/user-attachments/assets/44e4b385-6965-442c-ac4a-b5aa7493779f" />
+
+## Setup
 - To set up the project:
 
 1. Right click the project folder from the project explorer view.
