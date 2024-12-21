@@ -1,8 +1,8 @@
 ## SMART Task Tracker
 
-<img width="1204" alt="PriorityView" src="https://github.com/user-attachments/assets/905a4dec-39ad-4a6a-9a1c-9015d2f519a6" />
+<kbd><img width="1204" alt="PriorityView" src="https://github.com/user-attachments/assets/905a4dec-39ad-4a6a-9a1c-9015d2f519a6" /></kbd>
 
-<img width="1196" alt="AddTask" src="https://github.com/user-attachments/assets/44e4b385-6965-442c-ac4a-b5aa7493779f" />
+<kbd><img width="1196" alt="AddTask" src="https://github.com/user-attachments/assets/44e4b385-6965-442c-ac4a-b5aa7493779f" /></kbd>
 
 ## Setup
 - To set up the project:
